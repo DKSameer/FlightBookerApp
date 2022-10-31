@@ -15,7 +15,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import flights.generator.Flights.Destinations;
+import flights.generator.FlightRest.RestDestinations;
 
 
 @SpringBootTest
@@ -35,30 +35,30 @@ class GeneratorApplicationTests {
 	
 	@Test
 	void testRandomDestinations() {
-		Destinations dest = new Destinations();
+		RestDestinations dest = new RestDestinations();
 		System.out.println(dest.returnRandomDestinations(SAO_PAULO).toString());
 		assertTrue(dest.returnRandomDestinations(SAO_PAULO).size() >=1);
 	}
 	
 	
-//	@ParameterizedTest
-//	@ValueSource(booleans = {true,false})
-//	void testFlightLuggage(boolean luggageAvailable) {
-//		Flight flight = new Flight(date,time,luggageAvailable,750,"Delta");
-//		assertEquals(flight.getLuggageAllowed(), luggageAvailable);
-//	}
-//	
-//	@ParameterizedTest
-//	@ValueSource(doubles = {100.00,200.00,999.99})
-//	void testFlightPrice(double price) {
-//		Flight flight = new Flight(date,time,luggageAllowed,price,"Delta");
-//		assertEquals(flight.getPrice(), price);
-//	}
-//	
-//	@ParameterizedTest
-//	@ValueSource(strings = {"Delta","Ryanair","Turkish Airlines"})
-//	void testFlightAirline(double price) {
-//		Flight flight = new Flight(date,time,luggageAllowed,price,"Delta");
-//		assertEquals(flight.getPrice(), price);
-//	}
+	@ParameterizedTest
+	@ValueSource(booleans = {true,false})
+	void testFlightLuggage(boolean luggageAvailable) {
+		Flight flight = new Flight(date,time,luggageAvailable,750,"Delta");
+		assertEquals(flight.getLuggageAllowed(), luggageAvailable);
+	}
+	
+	@ParameterizedTest
+	@ValueSource(doubles = {100.00,200.00,999.99})
+	void testFlightPrice(double price) {
+		Flight flight = new Flight(date,time,luggageAllowed,price,"Delta");
+		assertEquals(flight.getPrice(), price);
+	}
+	
+	@ParameterizedTest
+	@ValueSource(strings = {"Delta","Ryanair","Turkish Airlines"})
+	void testFlightAirline(double price) {
+		Flight flight = new Flight(date,time,luggageAllowed,price,"Delta");
+		assertEquals(flight.getPrice(), price);
+	}
 }

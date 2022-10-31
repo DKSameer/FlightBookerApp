@@ -1,9 +1,9 @@
-package flights.generator.Flights;
+package flights.generator.FlightRest;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Destinations {
+public class RestDestinations {
 private List<String> origins =new ArrayList<String>();
 private List<String> destinations =new ArrayList<String>();
 
@@ -13,7 +13,7 @@ public static final int MADRID = 2;
 public static final int DUBLIN = 3;
 public static final int LISBON = 4;
 	
-public Destinations(){
+public RestDestinations(){
 	origins.add("Sao Paulo");
 	origins.add("Sevilla");
 	origins.add("Madrid");

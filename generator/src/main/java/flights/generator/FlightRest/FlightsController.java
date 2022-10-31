@@ -13,6 +13,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import flights.generator.FlightRest.RestDestinations;
+import flights.generator.FlightRest.FlightRepository;
+import flights.generator.FlightRest.FlightRequest;
+
 
 
 
@@ -31,7 +35,7 @@ public class FlightsController {
 	@GetMapping("/getdest/{origin}")
     public String getDestination(@PathVariable int origin) {
 		
-		Destinations dest = new Destinations();
+		RestDestinations dest = new RestDestinations();
         return dest.returnRandomDestinations(origin).toString();
     }
 	
