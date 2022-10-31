@@ -4,6 +4,7 @@ export default function Dropdown(props: {options: string}): ReactElement {
     const [option, setOption] = useState("");
 
     function on_option_change(event: React.ChangeEvent<HTMLInputElement>){
+        setOption(event.target.value);
         console.log(event.target.value);
     }
 

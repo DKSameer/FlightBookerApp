@@ -12,7 +12,7 @@ export default function CalendarC(): ReactElement {
     return (
         <div className='calendar-container'>
             <Calendar onChange={setDate} defaultValue={date}/>
-            <button onClick={print_dates}>*print dates in console*</button>
+            <button onClick={print_dates}>*print date in console*</button>
         </div>
     );
   }
