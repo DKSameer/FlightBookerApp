@@ -115,7 +115,7 @@ public class FlightList {
 	private double calculateTotalPrice() {
 		double totalPrice=0;
 		for(int i=0;i<list.size();i++) {
-			totalPrice=list.get(i).getPrice();
+			totalPrice+=list.get(i).getPrice();
 		}
 		return totalPrice;
 	}

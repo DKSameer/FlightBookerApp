@@ -28,4 +28,8 @@ public class FlightRequestList {
 		return requests.size();
 	}
 
+	public ArrayList<FlightRequest> getAllRequests(){
+		return requests;
+	}
+
 }

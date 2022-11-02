@@ -162,12 +162,4 @@ public class Flight {
         this.duration = duration;
     }
 
-    public FlightDataRandomiser getFDR() {
-        return FDR;
-    }
-
-    public void setFDR(FlightDataRandomiser fDR) {
-        FDR = fDR;
-    }
-
 }

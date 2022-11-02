@@ -1,6 +1,8 @@
 package flights.generator;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -25,24 +27,38 @@ import flights.generator.Flights.Flight;
 
 @SpringBootTest
 class FlightRequestListTests {
-    
-    //FlightRequest flightRequest = new FlightRequest(LocalDate.now(), "Madrid", "Lisbon");
+
+    // FlightRequest flightRequest = new FlightRequest(LocalDate.now(), "Madrid",
+    // "Lisbon");
 
     private static Stream<Arguments> flightRequestArgs() {
         LocalDate date = LocalDate.now().plusDays(7);
 
         return Stream.of(
-          Arguments.of("Madrid", "Lisbon", date),
-          Arguments.of("Sevilla","Dublin", date),
-          Arguments.of("Dublin","Lisbon", date)
-        );
+                Arguments.of("Madrid", "Lisbon", date),
+                Arguments.of("Sevilla", "Dublin", date.plusDays(1)),
+                Arguments.of("Dublin", "Lisbon", date.plusDays(2)));
+    }
+
+    private static Stream<Arguments> flightRequestArgsList() {
+        String[] origins = { "Madrid", "Lisbon", "Sevilla", "Dublin" };
+        String[] destinations = { "Lisbon", "Sevilla", "Dublin", "Madrid" };
+
+        List<LocalDate> dates = new ArrayList<>();
+        LocalDate date = LocalDate.now().plusDays(7);
+        dates.add(date);
+        dates.add(date.plusDays(1));
+        dates.add(date.plusDays(2));
+        dates.add(date.plusDays(3));
+
+        return Stream.of(Arguments.of(origins, destinations, dates));
     }
 
     @Test
     void testFlightRequestListCreation() {
         FlightRequestList frl = new FlightRequestList();
         assertTrue(frl instanceof FlightRequestList);
-        //assertTrue(frl)
+        // assertTrue(frl)
     }
 
     @ParameterizedTest
@@ -52,20 +68,36 @@ class FlightRequestListTests {
         int oldSize = frl.size();
         FlightRequest flightRequest = new FlightRequest(date, origin, destination);
         frl.addFlightRequest(flightRequest);
-        //assertTrue(frl);
+        FlightRequest added = frl.getAllRequests().get(oldSize);
+
+        assertAll("Check flightRequest added correctly",
+                () -> assertEquals(frl.size(), oldSize + 1),
+                () -> assertEquals(added.getDestination(), destination),
+                () -> assertEquals(added.getOrigin(), origin));
     }
 
-    @Test
-    void testAddMultipleFlightRequestList(String origin, String destination, LocalDate date) {
+    @ParameterizedTest
+    @MethodSource("flightRequestArgsList")
+    void testAddMultipleFlightRequestList(String[] origins, String[] destinations, List<LocalDate> datesList) {
         FlightRequestList frl = new FlightRequestList();
-        FlightRequest flightRequest1 = new FlightRequest(LocalDate.now(), "Madrid", "Lisbon");
-        FlightRequest flightRequest2 = new FlightRequest(LocalDate.now().plusDays(1), "Lisbon", "Dublin");
-        FlightRequest flightRequest3 = new FlightRequest(LocalDate.now().plusDays(2), "Dublin", "Sevilla");
-        frl.addFlightRequest(flightRequest1);
-        frl.addFlightRequest(flightRequest2);
-        frl.addFlightRequest(flightRequest3);
-        //assertTrue(actualMessage.contains(expectedMessage));
+        int numArgs = origins.length;
+
+        boolean allAddedCorrectly = false;
+
+        for (int i = 0; i < numArgs; i++) {
+            int oldSize = frl.size();
+            String origin = origins[i];
+            String destination = destinations[i];
+            FlightRequest flightRequest = new FlightRequest(datesList.get(i), origins[i], destinations[i]);
+            frl.addFlightRequest(flightRequest);
+
+            FlightRequest added = frl.getAllRequests().get(oldSize);
+            allAddedCorrectly = (frl.size() == oldSize + 1) &&
+                    added.getOrigin().equals(origin) &&
+                    added.getDestination().equals(destination);
+                    //System.out.println("Iteration: "+ (i+1));
+        }
+        assertTrue(allAddedCorrectly);
     }
-   
 
 }
