@@ -90,7 +90,7 @@ public class Flight {
         this.flightNumber = flightNumber;
     }
 
-    public boolean isLuggageAllowed() {
+    public boolean getLuggageAllowed() {
         return luggageAllowed;
     }
 
