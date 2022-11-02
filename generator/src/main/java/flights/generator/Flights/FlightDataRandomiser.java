@@ -38,7 +38,7 @@ public class FlightDataRandomiser {
     }
 
     public boolean luggageAllowed() {
-        return Math.ceil(Math.random()) == 1;
+        return (Math.random()) < 0.85;
     }
 
     public double price() {

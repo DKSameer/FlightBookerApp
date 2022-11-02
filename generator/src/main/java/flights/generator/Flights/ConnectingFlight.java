@@ -16,15 +16,17 @@ public class ConnectingFlight extends Flight {
 
     private void updateFlightDateTimes(LocalDateTime inputDateTime){
         //Flight duration
-        this.duration = FDR.duration();
+        this.setDuration((getFDR().duration())); 
 
-        this.departureDateTime = inputDateTime;
-        this.departureDate = inputDateTime.toLocalDate();
-        this.departureTime = inputDateTime.toLocalTime();
+        LocalDateTime temp = inputDateTime;
+        this.setDepartureDateTime(temp);
+        this.setDepartureDate(temp.toLocalDate());
+        this.setDepartureTime(temp.toLocalTime());
 
-        this.arrivalDateTime = departureDateTime.plus(duration);
-        this.arrivalDate = arrivalDateTime.toLocalDate();
-        this.arrivalTime = arrivalDateTime.toLocalTime();
+        temp = inputDateTime.plus(getDuration());
+        this.setArrivalDateTime(temp);
+        this.setArrivalDate(temp.toLocalDate());
+        this.setArrivalTime(temp.toLocalTime());
     }
 
 }
