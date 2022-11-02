@@ -24,8 +24,8 @@ public class FlightList {
 		this.destination = destination;
 		generateFlights();
 		allowLuggage=checkAllowLuggage();
-		totalPrice =getTotalPrice();
-		totalDuration = getTotalDuration();
+		totalPrice = calculateTotalPrice();
+		totalDuration = calculateTotalDuration();
 	}
 
 	public ArrayList<Flight> generateFlights() {
@@ -112,7 +112,7 @@ public class FlightList {
 		return true;
 	}
 	
-	private double getTotalPrice() {
+	private double calculateTotalPrice() {
 		double totalPrice=0;
 		for(int i=0;i<list.size();i++) {
 			totalPrice=list.get(i).getPrice();
@@ -120,7 +120,7 @@ public class FlightList {
 		return totalPrice;
 	}
 	
-	private Duration getTotalDuration() {
+	private Duration calculateTotalDuration() {
 		//Duration
 		// Update
 		LocalDateTime departure =  list.get(0).getDepartureDateTime();
@@ -185,6 +185,14 @@ public class FlightList {
 
 	public void setList(ArrayList<Flight> list) {
 		this.list = list;
+	}
+
+	public double getTotalPrice() {
+		return totalPrice;
+	}
+
+	public Duration getTotalDuration() {
+		return totalDuration;
 	}
 	
 }
