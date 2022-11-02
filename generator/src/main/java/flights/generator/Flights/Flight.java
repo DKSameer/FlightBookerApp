@@ -49,7 +49,7 @@ public class Flight {
         //Flight duration
         this.duration = FDR.duration();
         // Initialize randomised flight departure date and time from input
-        this.departureDate = FDR.date(inputDate);
+        this.departureDate = inputDate;
         this.departureTime = FDR.departureTime();
         this.departureDateTime = LocalDateTime.of(departureDate,departureTime);
         // Initialize arrival date and time from departure info and duration

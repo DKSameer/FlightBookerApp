@@ -9,9 +9,9 @@ public class FlightDataRandomiser {
     public LocalDate date(LocalDate inputDate) {
         LocalDate tempDate = inputDate;
         if (Math.ceil(Math.random()) == 1) {
-            tempDate.minusDays((int) Math.ceil(Math.random() * 3.99));
+            tempDate.minusDays((int) Math.floor(Math.random() * 3.99));
         } else {
-            tempDate.plusDays((int) Math.ceil(Math.random() * 3.99));
+            tempDate.plusDays((int) Math.floor(Math.random() * 3.99));
         }
         return tempDate;
     }

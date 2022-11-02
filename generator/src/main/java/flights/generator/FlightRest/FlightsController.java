@@ -28,10 +28,6 @@ public class FlightsController {
 	public FlightsController() {
 		flightRepository = new FlightRequestList();
 	}
-	
-//    public FlightsController(FlightRequestList flightRepository) {
-//        this.flightRepository = flightRepository;
-//    }
     
 	public static int value=1;
 	

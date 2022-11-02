@@ -1,8 +1,5 @@
 package flights.generator;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertInstanceOf;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -11,17 +8,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
-import org.junit.jupiter.api.function.Executable;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.springframework.boot.test.context.SpringBootTest;
 
+import flights.generator.FlightRest.FlightRequest;
 import flights.generator.Flights.Flight;
 
-@SpringBootTest
-class FlightTests {
-
+public class FlightRequestTests {
+    
     private static Stream<Arguments> nullFlightCreationArgs() {
         LocalDate date = LocalDate.now().plusDays(7);
         return Stream.of(
@@ -59,10 +54,10 @@ class FlightTests {
     void testFlightCreationNullArgs(String origin, String destination, LocalDate date) {
 
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-             new Flight(origin, destination, date);
+             new FlightRequest(date, origin, destination);
         });
     
-        String expectedMessage = "Flight constructor cannot contain null arguments";
+        String expectedMessage = "FlightRequest constructor cannot contain null arguments";
         String actualMessage = exception.getMessage();
     
         assertTrue(actualMessage.contains(expectedMessage));
@@ -72,10 +67,8 @@ class FlightTests {
     @MethodSource("normalFlightCreationArgs")
     void testFlightCreationNormalArgs(String origin, String destination, LocalDate date) {
 
-        Flight flight = new Flight(origin, destination, date);
-        assertTrue(flight instanceof Flight);
+        FlightRequest flight = new FlightRequest(date, origin, destination);
+        assertTrue(flight instanceof FlightRequest);
     }
-
-    
 
 }
