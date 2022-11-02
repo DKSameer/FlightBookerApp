@@ -1,6 +1,7 @@
 package flights.generator.Flights;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import flights.generator.FlightRest.FlightRequest;
@@ -10,6 +11,7 @@ public class FlightList {
 	private LocalDate date;
 	private String origin;
 	private String destination;
+	private double totalPrice;
 	private ArrayList<Flight> list= new ArrayList<Flight>();
 
 	public FlightList(LocalDate date, String origin, String destination){
@@ -28,29 +30,34 @@ public class FlightList {
 	private void addFlightsToList(int numberOfFlights){
 		String connection2;
 		String connection1;
+		Flight baseFlight;
+		Flight connectionFlight;
 		ArrayList<String> conne;
 		switch(numberOfFlights){
 			case 1:
-				createFlight(origin,destination);
+				list.add(createFlight(origin,destination));
 				break;
 			case 2:
 				conne =generateConnections(1);
 				connection1 = conne.get(0);
-				createFlight(origin,connection1);
-				createFlight(connection1,destination);
+				baseFlight = createFlight(origin,connection1);
+				list.add(baseFlight);
+				list.add(createConnectionFlight(connection1,destination,baseFlight.getArrivalDateTime()));
 				break;
 			case 3:
 				conne =generateConnections(2);
 				connection1 = conne.get(0);
 				connection2 = conne.get(1);
-				createFlight(origin,connection1);
-				createFlight(connection1,connection2);
-				createFlight(connection2,destination);
+				baseFlight = createFlight(origin,connection1);
+				connectionFlight = createConnectionFlight(connection1,connection2,baseFlight.getArrivalDateTime());
+				list.add(baseFlight);
+				list.add(connectionFlight);
+				list.add(createConnectionFlight(connection2,destination,connectionFlight.getArrivalDateTime()));
 				break;
 		}
 			
 	}
-	
+
 	private ArrayList<String> generateConnections(int numberOfConnections) {
 		ArrayList<String> connections = new ArrayList<String>();
 		ArrayList<String> connectionsPlaces = addConnectionPlaces();
@@ -75,8 +82,20 @@ public class FlightList {
 	}
 
 	private Flight createFlight(String origin,String destination) {
-		
-		return null;
+		Flight flight;
+		flight = new Flight(origin, destination, date);
+		return flight;
 		
 	}
+	
+	private Flight createConnectionFlight(String origin, String destination, LocalDateTime time) {
+		Flight flight;
+		flight = new ConnectingFlight(origin, destination, time.plusHours((long) ((Math.random() * 10)+2)));
+		return flight;
+	}
+
+	public ArrayList<Flight> getList() {
+		return list;
+	}
+	
 }
