@@ -1,4 +1,4 @@
-package flights.generator.Flights;
+package flights.generator.FlightRest;
 
 
 import java.time.LocalDate;
@@ -12,16 +12,22 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "flight")
 public class FlightRequest {
-	private LocalDate date;
-	private String origin;
-	private String destination;
+
 	
 	@Id
     @GeneratedValue
     private Long id;
 	
-	public FlightRequest(Long id,LocalDate date, String origin, String destination) {
+	private LocalDate date;
+	private String origin;
+	private String destination;
+	
+	public FlightRequest() {
+	}
+	
+	public FlightRequest(LocalDate date, String origin, String destination) {
 		super();
+		
 		this.date = date;
 		this.origin = origin;
 		this.destination = destination;
@@ -55,6 +61,10 @@ public class FlightRequest {
 
 	public Long getId() {
 		return id;
+	}
+	
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 }

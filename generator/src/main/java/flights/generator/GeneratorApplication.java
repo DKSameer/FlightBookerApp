@@ -8,7 +8,7 @@ public class GeneratorApplication {
 
 	public static void main(String[] args) {
 		//tempList.add(temp);
-		//SpringApplication.run(GeneratorApplication.class, args);
+		SpringApplication.run(GeneratorApplication.class, args);
 	}
 
 }

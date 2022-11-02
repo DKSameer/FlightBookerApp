@@ -1,4 +1,4 @@
-package flights.generator.Flights;
+package flights.generator.FlightRest;
 
 
 import org.springframework.data.jpa.repository.JpaRepository;
