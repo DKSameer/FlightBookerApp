@@ -26,7 +26,7 @@ import flights.generator.Flights.Flight;
 @SpringBootTest
 class FlightRequestListTests {
     
-    FlightRequest flightRequest = new FlightRequest(LocalDate.now(), "Madrid", "Lisbon");
+    //FlightRequest flightRequest = new FlightRequest(LocalDate.now(), "Madrid", "Lisbon");
 
     private static Stream<Arguments> flightRequestArgs() {
         LocalDate date = LocalDate.now().plusDays(7);
@@ -48,10 +48,25 @@ class FlightRequestListTests {
     @ParameterizedTest
     @MethodSource("flightRequestArgs")
     void testAddFlightRequestList(String origin, String destination, LocalDate date) {
-
+        FlightRequestList frl = new FlightRequestList();
+        FlightRequest flightRequest1 = new FlightRequest(date, "Madrid", "Lisbon");
+        frl.addFlightRequest(flightRequest1);
+        frl.addFlightRequest(flightRequest2);
+        frl.addFlightRequest(flightRequest3);
         //assertTrue(actualMessage.contains(expectedMessage));
     }
 
+    @Test
+    void testAddMultipleFlightRequestList(String origin, String destination, LocalDate date) {
+        FlightRequestList frl = new FlightRequestList();
+        FlightRequest flightRequest1 = new FlightRequest(LocalDate.now(), "Madrid", "Lisbon");
+        FlightRequest flightRequest2 = new FlightRequest(LocalDate.now().plusDays(1), "Lisbon", "Dublin");
+        FlightRequest flightRequest3 = new FlightRequest(LocalDate.now().plusDays(2), "Dublin", "Sevilla");
+        frl.addFlightRequest(flightRequest1);
+        frl.addFlightRequest(flightRequest2);
+        frl.addFlightRequest(flightRequest3);
+        //assertTrue(actualMessage.contains(expectedMessage));
+    }
    
 
 }

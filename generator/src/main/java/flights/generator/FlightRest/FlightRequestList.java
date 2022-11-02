@@ -24,4 +24,8 @@ public class FlightRequestList {
 		return null;
 	}
 	
+	public int size(){
+		return requests.size();
+	}
+
 }

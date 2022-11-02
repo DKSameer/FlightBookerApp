@@ -122,6 +122,7 @@ public class FlightList {
 	
 	private Duration initiateDuration() {
 		//Duration
+		// Update
 		LocalDateTime departure =  list.get(0).getDepartureDateTime();
 		LocalDateTime arrival = list.get(list.size()-1).getArrivalDateTime();
 		Duration duration = Duration.between(departure, arrival);
