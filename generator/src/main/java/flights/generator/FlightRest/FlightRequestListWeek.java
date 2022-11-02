@@ -3,11 +3,11 @@ package flights.generator.FlightRest;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class FlightRequestListDay {
+public class FlightRequestListWeek {
 	private ArrayList<FlightRequest> dayFlights;
 	private long id;
 	
-	public FlightRequestListDay(FlightRequest flight) {
+	public FlightRequestListWeek(FlightRequest flight) {
 		//dayFlights = returnAllFlightsForDay(flight);
 		dayFlights = returnAllFlightsForWeek(flight);
 		id = (long) Math.floor((Math.random() * 1000)+1);
