@@ -1,5 +1,6 @@
 package flights.generator.Flights;
 
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -12,6 +13,9 @@ public class FlightList {
 	private String origin;
 	private String destination;
 	private double totalPrice;
+	private Duration totalDuration;
+	private boolean allowLuggage;
+	private int totalLayover=0;
 	private ArrayList<Flight> list= new ArrayList<Flight>();
 
 	public FlightList(LocalDate date, String origin, String destination){
@@ -19,6 +23,9 @@ public class FlightList {
 		this.origin = origin;
 		this.destination = destination;
 		generateFlights();
+		allowLuggage=checkAllowLuggage();
+		totalPrice =getTotalPrice();
+		totalDuration = getTotalDuration();
 	}
 
 	public ArrayList<Flight> generateFlights() {
@@ -90,10 +97,39 @@ public class FlightList {
 	
 	private Flight createConnectionFlight(String origin, String destination, LocalDateTime time) {
 		Flight flight;
-		flight = new ConnectingFlight(origin, destination, time.plusHours((long) ((Math.random() * 10)+2)));
+		int layover= (int) ((Math.random() * 10)+2);
+		this.totalLayover += layover;
+		flight = new ConnectingFlight(origin, destination, time.plusHours((long)layover));
 		return flight;
 	}
 
+	private boolean checkAllowLuggage() {
+		for(int i=0;i<list.size();i++) {
+			if (list.get(i).luggageAllowed == false) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	private double getTotalPrice() {
+		double totalPrice=0;
+		for(int i=0;i<list.size();i++) {
+			totalPrice=list.get(i).getPrice();
+		}
+		return totalPrice;
+	}
+	
+	private Duration getTotalDuration() {
+		//Duration
+		for(int i=0;i<list.size();i++) {
+			totalPrice=list.get(i).getPrice();
+		}
+		return null;
+	}
+	
+	
+	
 	public ArrayList<Flight> getList() {
 		return list;
 	}

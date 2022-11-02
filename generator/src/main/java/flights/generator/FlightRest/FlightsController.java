@@ -43,9 +43,14 @@ public class FlightsController {
         return flightRepository.getFlightRequest(id);
     }
 	
+//	@GetMapping("/flights/{id}")
+//    public FlightRequest getFlight(@PathVariable long id) {
+//        return flightRepository.getFlightRequest(id);
+//    }
+	
 	@PostMapping
     public ResponseEntity createFlightRequest(@RequestBody FlightRequest flight) throws URISyntaxException {//
-		FlightRequest savedFlight = flight;
+		FlightRequest savedFlight = new FlightRequest(flight.getDate(),flight.getOrigin(),flight.getDestination());
 		savedFlight.setId((long)(Math.random() * 1000));
 		flightRepository.addFlightRequest(savedFlight);
         return ResponseEntity.created(new URI("/flights/" + savedFlight.getId())).body(savedFlight);
