@@ -5,7 +5,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-import flights.generator.FlightRest.FlightRequest;
 
 public class FlightList {
 	
@@ -24,12 +23,12 @@ public class FlightList {
 		this.destination = destination;
 		generateFlights();
 		allowLuggage=checkAllowLuggage();
-		totalPrice =getTotalPrice();
-		totalDuration = getTotalDuration();
+		totalPrice = calculateTotalPrice();
+		totalDuration = calculateTotalDuration();
 	}
 
 	public ArrayList<Flight> generateFlights() {
-		int numberOfFlights = (int)((Math.random() * 2) +1);
+		int numberOfFlights = (int)((Math.random() * 3) +1);
 		addFlightsToList(numberOfFlights);
 		return list;
 	}
@@ -112,20 +111,21 @@ public class FlightList {
 		return true;
 	}
 	
-	private double getTotalPrice() {
+	private double calculateTotalPrice() {
 		double totalPrice=0;
 		for(int i=0;i<list.size();i++) {
-			totalPrice=list.get(i).getPrice();
+			totalPrice+=list.get(i).getPrice();
 		}
 		return totalPrice;
 	}
 	
-	private Duration getTotalDuration() {
+	private Duration calculateTotalDuration() {
 		//Duration
-		for(int i=0;i<list.size();i++) {
-			totalPrice=list.get(i).getPrice();
-		}
-		return null;
+		// Update
+		LocalDateTime departure =  list.get(0).getDepartureDateTime();
+		LocalDateTime arrival = list.get(list.size()-1).getArrivalDateTime();
+		Duration duration = Duration.between(departure, arrival);
+		return duration;
 	}
 	
 	
@@ -184,6 +184,14 @@ public class FlightList {
 
 	public void setList(ArrayList<Flight> list) {
 		this.list = list;
+	}
+
+	public double getTotalPrice() {
+		return totalPrice;
+	}
+
+	public Duration getTotalDuration() {
+		return totalDuration;
 	}
 	
 }

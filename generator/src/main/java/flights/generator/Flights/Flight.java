@@ -5,7 +5,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
-import org.apache.el.util.Validation;
 
 public class Flight {
 
@@ -160,14 +159,6 @@ public class Flight {
 
     public void setDuration(Duration duration) {
         this.duration = duration;
-    }
-
-    public FlightDataRandomiser getFDR() {
-        return FDR;
-    }
-
-    public void setFDR(FlightDataRandomiser fDR) {
-        FDR = fDR;
     }
 
 }

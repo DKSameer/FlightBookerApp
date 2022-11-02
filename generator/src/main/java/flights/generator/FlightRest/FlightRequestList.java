@@ -24,4 +24,12 @@ public class FlightRequestList {
 		return null;
 	}
 	
+	public int size(){
+		return requests.size();
+	}
+
+	public ArrayList<FlightRequest> getAllRequests(){
+		return requests;
+	}
+
 }

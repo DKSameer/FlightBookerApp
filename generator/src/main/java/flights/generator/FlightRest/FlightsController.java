@@ -3,6 +3,7 @@ package flights.generator.FlightRest;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
@@ -24,9 +25,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class FlightsController {
 	
 	private final FlightRequestList flightRepository;
+	private final FlightRequestListDayStorage flightDayRepository;
 	
 	public FlightsController() {
 		flightRepository = new FlightRequestList();
+		flightDayRepository = new FlightRequestListDayStorage();
 	}
     
 	public static int value=1;
@@ -43,7 +46,12 @@ public class FlightsController {
         return flightRepository.getFlightRequest(id);
     }
 	
-//	@GetMapping("/flights/{id}/")
+	@GetMapping("/day/{id}")
+    public FlightRequestListDay getFlightDay(@PathVariable long id) {
+        return flightDayRepository.getFlightRequestDay(id);
+    }
+	
+//	@GetMapping("/flights/{id}")
 //    public FlightRequest getFlightInfo(@PathVariable long id) {
 //        return flightRepository.getFlightRequest(id).;
 //    }
@@ -56,7 +64,12 @@ public class FlightsController {
         return ResponseEntity.created(new URI("/flights/" + savedFlight.getId())).body(savedFlight);
     }
 	
-	
+	@PostMapping("/day")
+    public ResponseEntity createFlightRequestDay(@RequestBody FlightRequest flight) throws URISyntaxException {//
+		FlightRequestListDay dayFlight = new FlightRequestListDay(flight);
+		flightDayRepository.addFlightRequestListDay(dayFlight);
+        return ResponseEntity.created(new URI("/flights/day/" + dayFlight.getId())).body(dayFlight.getDayFlights());
+    }
 	
 //	@GetMapping("/{origin}")
 //    public String getClients(@PathVariable int origin) {

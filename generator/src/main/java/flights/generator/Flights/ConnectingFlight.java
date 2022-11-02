@@ -16,7 +16,8 @@ public class ConnectingFlight extends Flight {
 
     private void updateFlightDateTimes(LocalDateTime inputDateTime){
         //Flight duration
-        this.setDuration((getFDR().duration())); 
+        FlightDataRandomiser fdr = new FlightDataRandomiser();
+        this.setDuration((fdr.duration())); 
 
         LocalDateTime temp = inputDateTime;
         this.setDepartureDateTime(temp);
