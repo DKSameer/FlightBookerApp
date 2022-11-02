@@ -23,9 +23,9 @@ public class FlightList {
 		this.origin = origin;
 		this.destination = destination;
 		generateFlights();
-		allowLuggage = checkAllowLuggage();
-		totalPrice = initiatePrice();
-		totalDuration = initiateDuration();
+		allowLuggage=checkAllowLuggage();
+		totalPrice =getTotalPrice();
+		totalDuration = getTotalDuration();
 	}
 
 	public ArrayList<Flight> generateFlights() {
@@ -112,21 +112,23 @@ public class FlightList {
 		return true;
 	}
 	
-	private double initiatePrice() {
-		double totalPrice= 0;
+	private double getTotalPrice() {
+		double totalPrice=0;
 		for(int i=0;i<list.size();i++) {
 			totalPrice=list.get(i).getPrice();
 		}
 		return totalPrice;
 	}
 	
-	private Duration initiateDuration() {
+	private Duration getTotalDuration() {
 		//Duration
-		LocalDateTime departure =  list.get(0).getDepartureDateTime();
-		LocalDateTime arrival = list.get(list.size()-1).getArrivalDateTime();
-		Duration duration = Duration.between(departure, arrival);
-		return duration;
+		for(int i=0;i<list.size();i++) {
+			totalPrice=list.get(i).getPrice();
+		}
+		return null;
 	}
+	
+	
 	
 	public ArrayList<Flight> getList() {
 		return list;
@@ -156,14 +158,6 @@ public class FlightList {
 		this.destination = destination;
 	}
 
-	public void setTotalPrice(double totalPrice) {
-		this.totalPrice = totalPrice;
-	}
-
-	public void setTotalDuration(Duration totalDuration) {
-		this.totalDuration = totalDuration;
-	}
-
 	public boolean isAllowLuggage() {
 		return allowLuggage;
 	}
@@ -180,16 +174,16 @@ public class FlightList {
 		this.totalLayover = totalLayover;
 	}
 
+	public void setTotalPrice(double totalPrice) {
+		this.totalPrice = totalPrice;
+	}
+
+	public void setTotalDuration(Duration totalDuration) {
+		this.totalDuration = totalDuration;
+	}
+
 	public void setList(ArrayList<Flight> list) {
 		this.list = list;
-	}
-
-	public double getTotalPrice() {
-		return totalPrice;
-	}
-
-	public Duration getTotalDuration() {
-		return totalDuration;
 	}
 	
 }
