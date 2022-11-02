@@ -51,7 +51,7 @@ public class FlightRequestTests {
 
     @ParameterizedTest
     @MethodSource("nullFlightCreationArgs")
-    void testFlightCreationNullArgs(String origin, String destination, LocalDate date) {
+    void testFlightRequestCreationNullArgs(String origin, String destination, LocalDate date) {
 
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
              new FlightRequest(date, origin, destination);
@@ -65,7 +65,7 @@ public class FlightRequestTests {
 
     @ParameterizedTest
     @MethodSource("normalFlightCreationArgs")
-    void testFlightCreationNormalArgs(String origin, String destination, LocalDate date) {
+    void testFlightRequestCreationNormalArgs(String origin, String destination, LocalDate date) {
 
         FlightRequest flight = new FlightRequest(date, origin, destination);
         assertTrue(flight instanceof FlightRequest);
