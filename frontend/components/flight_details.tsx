@@ -86,7 +86,7 @@ export default function FlightDetails(): ReactElement {
         const flight_details = {date: format_date(date), origin: selected_origin, destination: selected_destination};
         // For some reason Spring API was recieving null data from 'fetch()' [NOT SURE WHY!]
         // So gotta use axios..
-        axios.post("http://localhost:8080/destination", flight_details).
+        axios.post("http://localhost:8080/destination/day", flight_details).
         then((response) => {
             console.log(response.data);
             setCurrentQueryId(response.data.id);

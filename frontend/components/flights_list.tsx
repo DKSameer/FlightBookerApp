@@ -37,12 +37,17 @@ export default function FlightsList(): ReactElement {
             <div className="font-semibold m-4">Flight Options</div>
             {flights.map(
                 (flight) => (
-                    <Link href="/information" key={flight.flight_id}>
+                    <Link href="/information" key={flight.id}>
                         <div className="flex bg-blue-500 w-fit m-2 hover:cursor-pointer">
-                            <p className="m-1">{flight.flight_id}</p>
-                            <p className="m-1">{flight.origin}</p>
-                            <p className="m-1">{flight.destination}</p>
-                            <p className="m-1">{flight.price}€</p>
+                            <div>
+                                <p className="m-1">{flight.id}</p>
+                                <p className="m-1">{flight.origin}</p>
+                                <p className="m-1">{flight.destination}</p>
+                                <p className="m-1">{flight.flightList.totalPrice}€</p>
+                            </div>
+                            <div>
+                                
+                            </div>
                         </div>
                     </Link>
                 ))}
