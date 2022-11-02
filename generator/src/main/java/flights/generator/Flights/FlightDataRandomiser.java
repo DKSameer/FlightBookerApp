@@ -4,6 +4,10 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+
+
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class FlightDataRandomiser {
 
     public LocalDate date(LocalDate inputDate) {

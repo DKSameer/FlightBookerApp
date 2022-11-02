@@ -71,4 +71,12 @@ public class FlightRequest {
 		this.id = id;
 	}
 
+	public FlightList getFlightList() {
+		return flightList;
+	}
+
+	public void setFlightList(FlightList flightList) {
+		this.flightList = flightList;
+	}
+
 }

@@ -43,9 +43,9 @@ public class FlightsController {
         return flightRepository.getFlightRequest(id);
     }
 	
-//	@GetMapping("/flights/{id}")
-//    public FlightRequest getFlight(@PathVariable long id) {
-//        return flightRepository.getFlightRequest(id);
+//	@GetMapping("/flights/{id}/")
+//    public FlightRequest getFlightInfo(@PathVariable long id) {
+//        return flightRepository.getFlightRequest(id).;
 //    }
 	
 	@PostMapping
