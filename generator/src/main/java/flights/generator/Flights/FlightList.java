@@ -5,7 +5,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-import flights.generator.FlightRest.FlightRequest;
 
 public class FlightList {
 	
@@ -29,7 +28,7 @@ public class FlightList {
 	}
 
 	public ArrayList<Flight> generateFlights() {
-		int numberOfFlights = (int)((Math.random() * 2) +1);
+		int numberOfFlights = (int)((Math.random() * 3) +1);
 		addFlightsToList(numberOfFlights);
 		return list;
 	}
@@ -115,7 +114,7 @@ public class FlightList {
 	private double calculateTotalPrice() {
 		double totalPrice=0;
 		for(int i=0;i<list.size();i++) {
-			totalPrice=list.get(i).getPrice();
+			totalPrice+=list.get(i).getPrice();
 		}
 		return totalPrice;
 	}
