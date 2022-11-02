@@ -49,11 +49,10 @@ class FlightRequestListTests {
     @MethodSource("flightRequestArgs")
     void testAddFlightRequestList(String origin, String destination, LocalDate date) {
         FlightRequestList frl = new FlightRequestList();
-        FlightRequest flightRequest1 = new FlightRequest(date, "Madrid", "Lisbon");
-        frl.addFlightRequest(flightRequest1);
-        frl.addFlightRequest(flightRequest2);
-        frl.addFlightRequest(flightRequest3);
-        //assertTrue(actualMessage.contains(expectedMessage));
+        int oldSize = frl.size();
+        FlightRequest flightRequest = new FlightRequest(date, origin, destination);
+        frl.addFlightRequest(flightRequest);
+        //assertTrue(frl);
     }
 
     @Test
