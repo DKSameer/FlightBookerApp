@@ -1,9 +1,13 @@
+import React from 'react';
 import { ReactElement, useState } from "react";
 import Calendar from "../components/calendar";
 import Link from "next/link";
 import axios from "axios";
+import { GlobalContext } from '../context/gcontext';
 
 export default function FlightDetails(): ReactElement {
+    const { current_query_id, setCurrentQueryId, setFlights } = React.useContext(GlobalContext);
+
     const origins = new Array<string>("Sao Paulo", "Sevilla", "Madrid", "Dublin", "Lisbon");
     const [selected_origin, setSelectedOrigin] = useState<string>(origins[0]);
 
@@ -13,7 +17,7 @@ export default function FlightDetails(): ReactElement {
     const flight_types = new Array<string>("One-way", "Round-trip");
     const [selected_flight_type, setSelectedFlightType] = useState<string>(flight_types[0]);
 
-    const [date, setDate] = useState<Date>();
+    const [date, setDate] = useState<Date>(new Date(2022, 10, 5));
 
     function update_date(date: Date): void{
         setDate(date);
@@ -79,15 +83,16 @@ export default function FlightDetails(): ReactElement {
 
     function post_flight_details(): void{
         //POST fetch: localhost:8080/destination body:{"date" : "2022-04-23", "origin" : "Sao Paulo","destination" : "Madrid"}
-        if(date){
-            const flight_details = {date: format_date(date), origin: selected_origin, destination: selected_destination};
-            console.log(flight_details);
-            // For some reason Spring API was recieving null data from 'fetch()' [NOT SURE WHY!]
-            // So gotta use axios..
-            const a = axios.post("http://localhost:8080/destination", flight_details);
-            console.log(a);
-            return;
-        }
+        const flight_details = {date: format_date(date), origin: selected_origin, destination: selected_destination};
+        // For some reason Spring API was recieving null data from 'fetch()' [NOT SURE WHY!]
+        // So gotta use axios..
+        axios.post("http://localhost:8080/destination", flight_details).
+        then((response) => {
+            console.log(response.data);
+            setCurrentQueryId(response.data.id);
+            setFlights(response.data);
+        })
+        return;
     }
 
     return (

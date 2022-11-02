@@ -1,5 +1,4 @@
 import { ReactElement, useState } from "react";
-import Dropdown from "./dropdown";
 
 /* 
     This should be birthdate..(discussable instructions)
