@@ -41,8 +41,8 @@ class FlightRequestListTests {
     @Test
     void testFlightRequestListCreation() {
         FlightRequestList frl = new FlightRequestList();
-        assertTrue(frl instanceof FlightRequestList)
-        assertTrue(frl)
+        assertTrue(frl instanceof FlightRequestList);
+        //assertTrue(frl)
     }
 
     @ParameterizedTest
