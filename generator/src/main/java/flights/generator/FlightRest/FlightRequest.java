@@ -3,6 +3,7 @@ package flights.generator.FlightRest;
 
 import java.time.LocalDate;
 
+import flights.generator.Flights.FlightList;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -21,6 +22,7 @@ public class FlightRequest {
 	private LocalDate date;
 	private String origin;
 	private String destination;
+	private FlightList flightList;
 	
 	public FlightRequest() {
 	}
@@ -31,7 +33,7 @@ public class FlightRequest {
 		this.date = date;
 		this.origin = origin;
 		this.destination = destination;
-		
+		flightList = new FlightList(date,origin,destination);
 		//call generate flightlist
 	}
 
