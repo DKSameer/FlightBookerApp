@@ -26,6 +26,11 @@ export default function FlightDetails(): ReactElement {
         <div className="flex flex-col p-4">
           <Link href="/flights">
             <button className="bg-purple-300 p-2 border border-sky-300 rounded" >Search</button>
+            {/* 
+            
+              POST fetch: localhost:8080/destination body:{"date" : "2022-04-23", "origin" : "Sao Paulo","destination" : "Madrid"}
+
+            */}
           </Link>
         </div>
       </div>
