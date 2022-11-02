@@ -4,14 +4,18 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+
+
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class FlightDataRandomiser {
 
     public LocalDate date(LocalDate inputDate) {
         LocalDate tempDate = inputDate;
         if (Math.ceil(Math.random()) == 1) {
-            tempDate.minusDays((int) Math.ceil(Math.random() * 3.99));
+            tempDate.minusDays((int) Math.floor(Math.random() * 3.99));
         } else {
-            tempDate.plusDays((int) Math.ceil(Math.random() * 3.99));
+            tempDate.plusDays((int) Math.floor(Math.random() * 3.99));
         }
         return tempDate;
     }
@@ -38,7 +42,7 @@ public class FlightDataRandomiser {
     }
 
     public boolean luggageAllowed() {
-        return Math.ceil(Math.random()) == 1;
+        return (Math.random()) < 0.85;
     }
 
     public double price() {

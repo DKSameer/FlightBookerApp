@@ -5,30 +5,36 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
+import org.apache.el.util.Validation;
+
 public class Flight {
 
     // Input data
-    String origin;
-    String destination;
+    private String origin;
+    private String destination;
     // Simple randomised attributes
-    String airline;
-    int flightNumber;
-    boolean luggageAllowed;
-    double price;
+    private String airline;
+    private int flightNumber;
+    private boolean luggageAllowed;
+    private double price;
     // Departure
-    LocalDate departureDate;
-    LocalTime departureTime;
-    LocalDateTime departureDateTime;
+    private LocalDate departureDate;
+    private LocalTime departureTime;
+    private LocalDateTime departureDateTime;
     // Arrival
-    LocalTime arrivalTime;
-    LocalDate arrivalDate;
-    LocalDateTime arrivalDateTime;
+    private LocalTime arrivalTime;
+    private LocalDate arrivalDate;
+    private LocalDateTime arrivalDateTime;
     // Randomised flight duration
-    Duration duration;
+    private Duration duration;
     // Flight Data randomiser
-    FlightDataRandomiser FDR = new FlightDataRandomiser();
+    private FlightDataRandomiser FDR = new FlightDataRandomiser();
 
     public Flight(String inputOrigin, String inputDestination, LocalDate inputDate){
+        //Defensive ProgrammingValidation.notNull(inputDate);
+        if (inputOrigin == null || inputDestination == null ||inputDate == null) {
+            throw new IllegalArgumentException("Flight constructor cannot contain null arguments");
+        }
         this.origin = inputOrigin;
         this.destination = inputDestination;
         
@@ -43,7 +49,7 @@ public class Flight {
         //Flight duration
         this.duration = FDR.duration();
         // Initialize randomised flight departure date and time from input
-        this.departureDate = FDR.date(inputDate);
+        this.departureDate = inputDate;
         this.departureTime = FDR.departureTime();
         this.departureDateTime = LocalDateTime.of(departureDate,departureTime);
         // Initialize arrival date and time from departure info and duration
@@ -84,7 +90,7 @@ public class Flight {
         this.flightNumber = flightNumber;
     }
 
-    public boolean isLuggageAllowed() {
+    public boolean getLuggageAllowed() {
         return luggageAllowed;
     }
 
