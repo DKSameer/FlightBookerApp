@@ -3,7 +3,6 @@ package flights.generator.FlightRest;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
@@ -47,7 +46,7 @@ public class FlightsController {
     }
 	
 	@GetMapping("/day/{id}")
-    public FlightRequestListDay getFlightDay(@PathVariable long id) {
+    public FlightRequestListWeek getFlightDay(@PathVariable long id) {
         return flightDayRepository.getFlightRequestDay(id);
     }
 	
@@ -66,7 +65,7 @@ public class FlightsController {
 	
 	@PostMapping("/day")
     public ResponseEntity createFlightRequestDay(@RequestBody FlightRequest flight) throws URISyntaxException {//
-		FlightRequestListDay dayFlight = new FlightRequestListDay(flight);
+		FlightRequestListWeek dayFlight = new FlightRequestListWeek(flight);
 		flightDayRepository.addFlightRequestListDay(dayFlight);
         return ResponseEntity.created(new URI("/flights/day/" + dayFlight.getId())).body(dayFlight.getDayFlights());
     }
