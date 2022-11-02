@@ -32,10 +32,10 @@ public class FlightsController {
 	public static int value=1;
 	
 	@GetMapping("/getdest/{origin}")
-    public String getDestination(@PathVariable int origin) {
+    public List<String> getDestination(@PathVariable int origin) {
 		
 		RestDestinations dest = new RestDestinations();
-        return dest.initializeDestinations(origin).toString();
+        return dest.initializeDestinations(origin);
     }
 	
 	@GetMapping("/flights/{id}")

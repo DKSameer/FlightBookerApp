@@ -3,6 +3,7 @@ package flights.generator.FlightRest;
 
 import java.time.LocalDate;
 
+import flights.generator.Flights.FlightList;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -21,6 +22,7 @@ public class FlightRequest {
 	private LocalDate date;
 	private String origin;
 	private String destination;
+	private FlightList flightList;
 	
 	public FlightRequest() {
 	}
@@ -33,6 +35,7 @@ public class FlightRequest {
 		if (origin == null || destination == null ||date == null) {
             throw new IllegalArgumentException("FlightRequest constructor cannot contain null arguments");
         }
+		flightList = new FlightList(date,origin,destination);
 		//call generate flightlist
 	}
 
