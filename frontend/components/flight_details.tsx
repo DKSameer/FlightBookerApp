@@ -21,7 +21,9 @@ export default function FlightDetails(): ReactElement {
     }
 
     function format_date(date: Date): string{
-        return date.getFullYear + "-" + date.getMonth() + "-" + date.getDay();
+        return date.getFullYear() + "-" + 
+        (date.getMonth() < 10 ? "0"+date.getMonth() : date.getMonth()) + "-" + 
+        (date.getDay() < 10 ? "0"+date.getDay() : date.getDay());
     }
 
     // from string to num
@@ -78,10 +80,12 @@ export default function FlightDetails(): ReactElement {
     function post_flight_details(): void{
         //POST fetch: localhost:8080/destination body:{"date" : "2022-04-23", "origin" : "Sao Paulo","destination" : "Madrid"}
         if(date){
-            const transaction = {date: format_date(date), origin: selected_origin, destination: selected_destination};
+            const flight_details = {date: format_date(date), origin: selected_origin, destination: selected_destination};
+            console.log(flight_details);
             // For some reason Spring API was recieving null data from 'fetch()' [NOT SURE WHY!]
             // So gotta use axios..
-            axios.post("http://localhost:8080/destination", transaction);
+            const a = axios.post("http://localhost:8080/destination", flight_details);
+            console.log(a);
             return;
         }
     }

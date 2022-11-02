@@ -3,14 +3,14 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 
 export default function CalendarC(props: {date: (date: Date) => void}): ReactElement {
-    const [date, setDate] = useState(new Date(2022, 10, 1));
+    const [date, setDate] = useState(new Date(2022, 10, 4));
   
     function print_dates(){
         console.log(date);
     }
 
     function pass_date(event: any): void{
-        props.date(event.target.value);
+        props.date(event);
         return;
     }
 

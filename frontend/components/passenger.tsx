@@ -39,6 +39,9 @@ export default function PassengerC(props: {p_data: any}): ReactElement {
     const [age, setAge] = useState<Age>(Age.BiggerThan9);
     const [bags, setBags] = useState<boolean>(false);
 
+    const age_list = new Array<Age>(Age.LessThan2, Age.Between2And9, Age.BiggerThan9);
+    const bags_list = new Array<string>("Yes", "No");
+
     let passenger = new PassengerClass(name, surname, nationality, identification, age, bags);
 
     function on_name_change(event: React.ChangeEvent<HTMLInputElement>): void{
@@ -57,6 +60,16 @@ export default function PassengerC(props: {p_data: any}): ReactElement {
     }
 
     function on_identification_change(event: React.ChangeEvent<HTMLSelectElement>): void{
+        setIdentification(event.target.value);
+        return;
+    }
+
+    function on_age_change(event: React.ChangeEvent<HTMLSelectElement>): void{
+        setIdentification(event.target.value);
+        return;
+    }
+
+    function on_bags_change(event: React.ChangeEvent<HTMLSelectElement>): void{
         setIdentification(event.target.value);
         return;
     }
@@ -104,11 +117,25 @@ export default function PassengerC(props: {p_data: any}): ReactElement {
             </div>
             <div className=" m-4 mb-0">
                 <p>Age</p>
-                <Dropdown mode="passenger_age"></Dropdown>
+                <div className="relative w-full lg:max-w-sm">
+                    <select onChange={on_age_change} className="w-full p-2.5 text-gray-500 bg-white border rounded-md shadow-sm outline-none appearance-none focus:border-indigo-600">
+                        {age_list.map(
+                            (age) => (
+                                <option value={age} key={age}>{age}</option>
+                            ))}
+                    </select>
+                </div>
             </div>
             <div className=" m-4 mb-0">
                 <p>Bags</p>
-                <Dropdown mode="passenger_bags"></Dropdown>
+                <div className="relative w-full lg:max-w-sm">
+                    <select onChange={on_bags_change} className="w-full p-2.5 text-gray-500 bg-white border rounded-md shadow-sm outline-none appearance-none focus:border-indigo-600">
+                        {bags_list.map(
+                            (bags) => (
+                                <option value={bags} key={bags}>{bags}</option>
+                            ))}
+                    </select>
+                </div>
             </div>
             <div className="bg-yellow-200 w-fit">
                 <button onClick={pass_data}>Save</button>
