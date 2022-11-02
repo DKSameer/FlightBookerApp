@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RestDestinations {
-private List<String> origins =new ArrayList<String>();
-private List<String> destinations =new ArrayList<String>();
+private List<String> origins = new ArrayList<String>();
+private List<String> destinations = new ArrayList<String>();
 
 public static final int SAO_PAULO = 0;
 public static final int SEVILLA = 1;
@@ -28,6 +28,18 @@ public RestDestinations(){
 	destinations.add("Rome");
 }
 
+public List<String> initializeDestinations(int currentcity){
+	List<String> destinationRandom = new ArrayList<String>();
+	int randomAmountToRemove = (int)(Math.random() * (destinations.size()-1));
+	destinationRandom = destinations;
+	destinationRandom.remove(currentcity);
+	for (int i=0;i<randomAmountToRemove;i++) {
+		int randomElementToRemove = (int)(Math.random() * destinationRandom.size());
+		destinationRandom.remove(randomElementToRemove);
+	}
+	return destinationRandom;
+}
+
 public List<String> getOrigins() {
 	return origins;
 }
@@ -40,17 +52,6 @@ public List<String> getDestinations() {
 	return destinations;
 }
 
-public List<String> returnRandomDestinations(int currentcity){
-	List<String> destinationRandom =new ArrayList<String>();
-	int randomAmountToRemove = (int)(Math.random() * (destinations.size()-1));
-	destinationRandom=destinations;
-	destinationRandom.remove(currentcity);
-	for (int i=0;i<randomAmountToRemove;i++) {
-		int randomElementToRemove = (int)(Math.random() * destinationRandom.size());
-		destinationRandom.remove(randomElementToRemove);
-	}
-	return destinationRandom;
-}
 
 public void setDestinations(List<String> destinations) {
 	this.destinations = destinations;

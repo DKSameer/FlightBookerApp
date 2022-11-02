@@ -5,6 +5,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
+import org.apache.el.util.Validation;
+
 public class Flight {
 
     // Input data
@@ -29,6 +31,10 @@ public class Flight {
     FlightDataRandomiser FDR = new FlightDataRandomiser();
 
     public Flight(String inputOrigin, String inputDestination, LocalDate inputDate){
+        //Defensive ProgrammingValidation.notNull(inputDate);
+        if (inputOrigin == null || inputDestination == null ||inputDate == null) {
+            throw new IllegalArgumentException("Flight constructor cannot contain null arguments");
+        }
         this.origin = inputOrigin;
         this.destination = inputDestination;
         

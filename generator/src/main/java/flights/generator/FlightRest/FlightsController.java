@@ -1,9 +1,8 @@
-package flights.generator.Flights;
+package flights.generator.FlightRest;
 
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,18 +12,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import flights.generator.FlightRest.RestDestinations;
-import flights.generator.FlightRest.FlightRepository;
-import flights.generator.FlightRest.FlightRequest;
-
-
-
-
 @RestController
 @RequestMapping("/destination")
 public class FlightsController {
 	
 	private final FlightRepository flightRepository;
+	
+	public FlightsController() {
+		this.flightRepository = null;
+	}
 	
     public FlightsController(FlightRepository flightRepository) {
         this.flightRepository = flightRepository;
@@ -36,7 +32,7 @@ public class FlightsController {
     public String getDestination(@PathVariable int origin) {
 		
 		RestDestinations dest = new RestDestinations();
-        return dest.returnRandomDestinations(origin).toString();
+        return dest.initializeDestinations(origin).toString();
     }
 	
 	@GetMapping("/flights/{id}")
