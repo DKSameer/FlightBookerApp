@@ -39,7 +39,7 @@ public class FlightsController {
     public String getDestination(@PathVariable int origin) {
 		
 		RestDestinations dest = new RestDestinations();
-        return dest.returnRandomDestinations(origin).toString();
+        return dest.initializeDestinations(origin).toString();
     }
 	
 	@GetMapping("/flights/{id}")
