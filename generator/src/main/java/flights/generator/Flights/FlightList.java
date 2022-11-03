@@ -15,6 +15,8 @@ public class FlightList {
 	private Duration totalDuration;
 	private boolean allowLuggage;
 	private int totalLayover=0;
+	private int scales=0;
+	private int numberOfFlights=0;
 	private ArrayList<Flight> list= new ArrayList<Flight>();
 
 	public FlightList(LocalDate date, String origin, String destination){
@@ -25,10 +27,11 @@ public class FlightList {
 		allowLuggage=checkAllowLuggage();
 		totalPrice = calculateTotalPrice();
 		totalDuration = calculateTotalDuration();
+		scales= numberOfFlights-1;
 	}
 
 	public ArrayList<Flight> generateFlights() {
-		int numberOfFlights = (int)((Math.random() * 3) +1);
+		numberOfFlights = (int)((Math.random() * 3) +1);
 		addFlightsToList(numberOfFlights);
 		return list;
 	}
@@ -192,6 +195,22 @@ public class FlightList {
 
 	public Duration getTotalDuration() {
 		return totalDuration;
+	}
+
+	public int getScales() {
+		return scales;
+	}
+
+	public void setScales(int scales) {
+		this.scales = scales;
+	}
+
+	public int getNumberOfFlights() {
+		return numberOfFlights;
+	}
+
+	public void setNumberOfFlights(int numberOfFlights) {
+		this.numberOfFlights = numberOfFlights;
 	}
 	
 }
