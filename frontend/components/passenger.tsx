@@ -48,17 +48,17 @@ export default function PassengerC(props: {p_data: any}): ReactElement {
         return;
     }
 
-    function on_surname_change(event: React.ChangeEvent<HTMLSelectElement>): void{
+    function on_surname_change(event: React.ChangeEvent<HTMLInputElement>): void{
         setSurame(event.target.value);
         return;
     }
 
-    function on_nationality_change(event: React.ChangeEvent<HTMLSelectElement>): void{
+    function on_nationality_change(event: React.ChangeEvent<HTMLInputElement>): void{
         setNationality(event.target.value);
         return;
     }
 
-    function on_identification_change(event: React.ChangeEvent<HTMLSelectElement>): void{
+    function on_identification_change(event: React.ChangeEvent<HTMLInputElement>): void{
         setIdentification(event.target.value);
         return;
     }
@@ -78,14 +78,13 @@ export default function PassengerC(props: {p_data: any}): ReactElement {
     }
     
     return (
-        <div className="flex flex-col bg-green-400 pb-4">
+        <div className="flex flex-col bg-sky-300 pb-4 border rounded border-sky-400">
             <div className="flex">
                 <div className="w-fit m-4 mb-0">
                     <p>Name</p>
                     <input
                         type="text"
-                        className="block w-6/7 px-4 py-2 text-purple-300 bg-white border_lean"
-                        placeholder="Your name..."
+                        className="block w-6/7 px-4 py-2 border rounded-md"
                         onChange={on_name_change}
                     />
                 </div>
@@ -93,8 +92,8 @@ export default function PassengerC(props: {p_data: any}): ReactElement {
                     <p>Surame</p>
                     <input
                         type="text"
-                        className="block w-6/7 px-4 py-2 text-purple-300 bg-white border_lean"
-                        placeholder="Your surname..."
+                        className="block w-6/7 px-4 py-2 border rounded-md"
+                        onChange={on_surname_change}
                     />
                 </div>
             </div>
@@ -102,33 +101,33 @@ export default function PassengerC(props: {p_data: any}): ReactElement {
                 <p>Nationality</p>
                 <input
                     type="text"
-                    className="block w-6/7 px-4 py-2 text-purple-300 bg-white border_lean"
-                    placeholder="Your nationality..."
+                    className="block w-6/7 px-4 py-2 border rounded-md"
+                    onChange={on_nationality_change}
                 />
             </div>
             <div className="w-fit m-4">
                 <p>Identification (NIF or Passport)</p>
                 <input
                     type="text"
-                    className="block w-6/7 px-4 py-2 text-purple-300 bg-white border_lean"
-                    placeholder="Your identification number..."
+                    className="block w-6/7 px-4 py-2 border rounded-md"
+                    onChange={on_identification_change}
                 />
             </div>
-            <div className=" m-4 mb-0">
+            <div className="m-4 mb-0">
                 <p>Age</p>
                 <div className="relative w-full lg:max-w-sm">
-                    <select onChange={on_age_change} className="w-full p-2.5 text-gray-500 bg-white border rounded-md shadow-sm outline-none appearance-none focus:border-indigo-600">
+                    <select onChange={on_age_change} className="hover:cursor-pointer w-full p-2.5 text-gray-500 bg-white border rounded-md shadow-sm outline-none appearance-none focus:border-indigo-600">
                         {age_list.map(
                             (age) => (
-                                <option value={age} key={age}>{age}</option>
+                                <option value={age} key={age}>{age === 0 ? "< 2 years" : (age === 1 ? "Between 2 and 9 years (inclusive)" : "> 9 years")}</option>
                             ))}
                     </select>
                 </div>
             </div>
-            <div className=" m-4 mb-0">
+            <div className="m-4 mb-0">
                 <p>Bags</p>
                 <div className="relative w-full lg:max-w-sm">
-                    <select onChange={on_bags_change} className="w-full p-2.5 text-gray-500 bg-white border rounded-md shadow-sm outline-none appearance-none focus:border-indigo-600">
+                    <select onChange={on_bags_change} className="hover:cursor-pointer w-full p-2.5 text-gray-500 bg-white border rounded-md shadow-sm outline-none appearance-none focus:border-indigo-600">
                         {bags_list.map(
                             (bags) => (
                                 <option value={bags} key={bags}>{bags}</option>
@@ -136,7 +135,7 @@ export default function PassengerC(props: {p_data: any}): ReactElement {
                     </select>
                 </div>
             </div>
-            <div className="bg-yellow-200 w-fit">
+            <div className="m-4 mb-0 p-1 bg-white border rounded border-sky-400 hover:bg-green-200 hover:cursor-pointer w-fit">
                 <button onClick={pass_data}>Save</button>
             </div>
         </div>

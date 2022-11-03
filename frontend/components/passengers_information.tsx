@@ -2,6 +2,9 @@ import Link from "next/link";
 import { ReactElement, useState } from "react";
 import Passenger from "./passenger";
 import { PassengerClass, Age } from "./passenger";
+import Router from 'next/router'
+
+let passengers: Array<PassengerClass> = new Array<PassengerClass>();
 
 export default function PassengersInformation(): ReactElement {
     const [number_of_passengers_array, setNumberOfPassengersArray] = useState<Array<number>>(new Array<number>());
@@ -13,11 +16,9 @@ export default function PassengersInformation(): ReactElement {
             x.push(i+1);
         }
         setNumberOfPassengersArray(x);
-        console.log(number_of_passengers_array);
         return;
     }
 
-    let passengers: Array<PassengerClass> = new Array<PassengerClass>();
 
     function containsPassenger(name: string): boolean {
         for(let i:number=0; i<passengers.length; i++){
@@ -33,28 +34,44 @@ export default function PassengersInformation(): ReactElement {
             if(!containsPassenger(name)){
                 passengers.push(new PassengerClass(name, surname, nationality, identification, age, bags));
             }
-            console.log(passengers);
             return;
+    }
+
+    function book_flight(): void{
+        /* 
+            TODO: paste passengers information to API
+        */
+        Router.push("/booking");
+        return;
     }
 
     return (
         <div className="flex flex-col justify-center items-center">
             <div className="font-semibold m-4">Passengers Information</div>
-            <div className="flex flex-col bg-pink-200 p-6 w-2/3">
-                <Passenger p_data={add_passenger}></Passenger>
-            </div>
-            <div>
-                <input
+            <div className="flex flex-col overflow-y-scroll h-96 my-10 mx-28 p-8 border rounded border-sky-300">
+                <div className="p-4">
+                    <Passenger p_data={add_passenger}></Passenger>
+                </div>
+                <div className="p-4">
+                    <input
                         type="text"
-                        className="block w-6/7 px-4 py-2 text-purple-300 bg-white border_lean"
-                        placeholder="Any other passengers?"
+                        className="block w-3/4 px-4 py-2 text-purple-300 bg-white border_lean border rounded border-sky-300"
+                        placeholder="Number of extra passengers..."
                         onChange={on_number_of_passengers_change}
                     />
+                </div>
+                <div>
+                    {number_of_passengers_array.map(
+                    (p) => (
+                        <div className="p-4" key={p}>
+                            <Passenger p_data={add_passenger}></Passenger>
+                        </div>
+                    ))}
+                </div>
             </div>
-            {number_of_passengers_array.map(
-                (p) => (
-                    <Passenger key={p} p_data={add_passenger}></Passenger>
-                ))}
+            <div className="flex flex-col p-4 justify-end">
+                <button className="bg-sky-300 p-2 border border-sky-400 rounded" onClick={book_flight}>Book</button>
+            </div>
         </div>
     );
 }

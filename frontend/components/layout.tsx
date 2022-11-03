@@ -2,13 +2,13 @@ import { ReactElement } from "react";
 
 export default function Layout({children}: any): ReactElement {
   return (
-    <div id="app_wrapper" className="flex flex-col bg-slate-500 p-8">
-        <div id="logo_wrapper" className="flex justify-center items-center w-full">
-            <div className="m-8 mb-16">
-                <h1>Flight Booker</h1>
-            </div>
-        </div>
-        <main>{children}</main>
-    </div>
+      <div id="app_wrapper" className="flex flex-col items-center bg-sky-200 h-full border rounded border-sky-300 mt-10 mx-20">
+          <div id="logo_wrapper" className="flex justify-center items-center w-full">
+              <div className="m-8 mb-16">
+                  <h1 className=" font-semibold text-2xl">Flight Booker</h1>
+              </div>
+          </div>
+          <main>{children}</main>
+      </div>
   );
 }
