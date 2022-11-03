@@ -79,14 +79,16 @@ public class FlightsController {
 	}
 	
 	
-	@PostMapping
-    public ResponseEntity createFlightRequest(@RequestBody FlightRequest flight) throws URISyntaxException {//
-		FlightRequest savedFlight = new FlightRequest(flight.getDate(),flight.getOrigin(),flight.getDestination());
-		savedFlight.setId(++lastFlightRequestId);
-		//savedFlight.setId((long)(Math.random() * 1000));
-		flightRepository.addFlightRequest(savedFlight);
-        return ResponseEntity.created(new URI("/flights/" + savedFlight.getId())).body(savedFlight);
-    }
+//	@PostMapping
+//    public ResponseEntity createFlightRequest(@RequestBody FlightRequest flight) throws URISyntaxException {//
+//		FlightRequest savedFlight = new FlightRequest(flight.getDate(),flight.getOrigin(),flight.getDestination());
+//		savedFlight.setId(++lastFlightRequestId);
+//		//savedFlight.setId((long)(Math.random() * 1000));
+//		flightRepository.addFlightRequest(savedFlight);
+//        return ResponseEntity.created(new URI("/flights/" + savedFlight.getId())).body(savedFlight);
+//    }
+	
+	//Body needed for this post is : {"date" : "2022-04-23", "origin" : "Sao Paulo","destination" : "Madrid"}
 	
 	@PostMapping("/day")
     public ResponseEntity createFlightRequestDay(@RequestBody FlightRequest flight) throws URISyntaxException {//
