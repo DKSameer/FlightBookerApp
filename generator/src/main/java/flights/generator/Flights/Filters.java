@@ -56,13 +56,10 @@ public class Filters {
 		}else {
 			result2=result1;
 		}
-		System.out.println("luggage value "+luggage);
 		if (luggage !=null) {
-			System.out.println("Not Null");
 			for(int i = 0; i < result2.size(); i++) {
 				if(result2.get(i).getFlightList().isAllowLuggage() == luggage) {
 					result3.add(result2.get(i));
-					System.out.println("Adding "+result2.get(i).getFlightList().isAllowLuggage());
 				}
 			}
 		}else {

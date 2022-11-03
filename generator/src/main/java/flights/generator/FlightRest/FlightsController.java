@@ -63,7 +63,7 @@ public class FlightsController {
 //    public FlightRequest getFlightInfo(@PathVariable long id) {
 //        return flightRepository.getFlightRequest(id).;
 //    }
-	@RequestMapping(method = RequestMethod.GET, value = "/{id}/custom")
+	@RequestMapping(method = RequestMethod.GET, value = "/{id}/filter")
 	@ResponseBody
 	//@GetMapping("/{id}/custom")
 	public ArrayList<FlightRequest> getTest(@PathVariable long id,
@@ -124,8 +124,8 @@ public class FlightsController {
     public ResponseEntity createFlightRequestDay(@RequestBody FlightRequest flight) throws URISyntaxException {//
 		FlightRequestListWeek dayFlight = new FlightRequestListWeek(flight);
 		flightDayRepository.addFlightRequestListDay(dayFlight);
-        //return ResponseEntity.created(new URI("/flights/day/" + dayFlight.getId())).body(dayFlight.getDayFlights());
-		return ResponseEntity.created(new URI("/flights/day/" + dayFlight.getId())).body(dayFlight);
+        return ResponseEntity.created(new URI("/destination/day/" + dayFlight.getId())).body(dayFlight.getDayFlights());
+		//return ResponseEntity.created(new URI("/flights/day/" + dayFlight.getId())).body(dayFlight);
     }
 	
 	public long getLastFlightRequestId() {
