@@ -23,8 +23,8 @@ public class BookerController {
 	}
 
 	@PostMapping
-    public ResponseEntity createFlightRequestDay(@RequestBody BookConfirmation confirmBooking) throws URISyntaxException {//
-		BookConfirmation confirmation = new BookConfirmation(confirmBooking.getName(),confirmBooking.getCardNumber(),confirmBooking.getExpiryDate());
+    public ResponseEntity sendBooking(@RequestBody BookingConfirmation confirmBooking) throws URISyntaxException {//
+		BookingConfirmation confirmation = new BookingConfirmation(confirmBooking.getName(),confirmBooking.getCardNumber(),confirmBooking.getExpiryDate());
         return ResponseEntity.created(new URI("/book")).body(confirmation.getBookingResponse());
     }
 }

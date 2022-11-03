@@ -15,10 +15,11 @@ public class BookingConfirmation {
 
     private BookingConfirmation(){}
 
-    public BookingConfirmation(String name, String cardNumber, LocalDate expiryDate) {
+    public BookingConfirmation(String name, String cardNumber, String expiryDate) {
         this.name = name;
         this.cardNumber = cardNumber;
         this.expiryDate = expiryDate;
+        System.out.println(this.expiryDate);
         this.bookingConfirmed = true;
         confirmBookingDetails();
         if(bookingConfirmed){
@@ -28,6 +29,7 @@ public class BookingConfirmation {
         }
     }
 
+    
     private void confirmBookingDetails(){
         if(containsIllegalCharacters(name)){
             issue = "Illegal characters in name";
