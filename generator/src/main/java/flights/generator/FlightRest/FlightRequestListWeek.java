@@ -26,14 +26,17 @@ public class FlightRequestListWeek {
 	
 	public ArrayList<FlightRequest> returnAllFlightsForWeek(FlightRequest flight){
 		ArrayList<FlightRequest> dayFlights = new ArrayList<FlightRequest>();
-		
-		
+		// If date chosen is in the past, show results for the newest 7 days
+		LocalDate chosenDate = flight.getDate();
+		LocalDate today = LocalDate.now();
+		if(today.isAfter(chosenDate)){
+			chosenDate = today.plusDays(3);
+		}
 		for (int i=-3; i<4;i++) {
 			int flightsOnTheDay = (int) Math.floor((Math.random() * 3)+2);
 		for (int j = 0; j<flightsOnTheDay;j++) {
-			dayFlights.add(createRandomFlight(flight,flight.getDate().plusDays(i)));
+			dayFlights.add(createRandomFlight(flight,chosenDate.plusDays(i)));
 		}
-		
 		}
 		return dayFlights;
 	}
