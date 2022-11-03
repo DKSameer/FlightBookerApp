@@ -15,9 +15,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import flights.generator.FlightRest.FlightRequest;
-import flights.generator.FlightRest.FlightRequestListWeek;
-
 
 
 
@@ -30,12 +27,10 @@ public class PricesController {
 	public PricesController() {
 		//PriceFactorsRepository = new PriceFactorsRepository();
 	}
-    
-	public static int value=1;
 	
 	@PostMapping
-    public ResponseEntity createFlightRequestDay(@RequestBody PriceCalculator calculatePrice) throws URISyntaxException {//
-		PriceCalculator finalPrice = new PriceCalculator(calculatePrice);
+    public ResponseEntity getFinalPrice(@RequestBody PriceCalculator calculatePrice) throws URISyntaxException {//
+		PriceCalculator finalPrice = new PriceCalculator(calculatePrice.getTotalPassengers(),calculatePrice.getKids(),calculatePrice.getBabies(),calculatePrice.getLuggage(),calculatePrice.getBasePrice());
         return ResponseEntity.created(new URI("/price")).body(finalPrice.getFinalPrice());
 		//return ResponseEntity.created(new URI("/flights/day/" + dayFlight.getId())).body(dayFlight);
     }
