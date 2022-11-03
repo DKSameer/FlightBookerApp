@@ -1,6 +1,8 @@
 package flights.booker;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,8 +25,10 @@ public class BookerController {
 	}
 
 	@PostMapping
-    public ResponseEntity sendBooking(@RequestBody BookingConfirmation confirmBooking) throws URISyntaxException {//
-		BookingConfirmation confirmation = new BookingConfirmation(confirmBooking.getName(),confirmBooking.getCardNumber(),confirmBooking.getExpiryDate());
+    public ResponseEntity sendBooking(@RequestBody BookingInput bookingInput) throws URISyntaxException {//
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/yy");
+		LocalDate parsedDate = LocalDate.parse(bookingInput.getExpiryDate(),formatter);
+		BookingConfirmation confirmation = new BookingConfirmation(bookingInput.getName(),bookingInput.getCardNumber(),parsedDate);
         return ResponseEntity.created(new URI("/book")).body(confirmation.getBookingResponse());
     }
 }
