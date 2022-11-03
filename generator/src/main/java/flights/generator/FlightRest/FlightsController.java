@@ -59,14 +59,9 @@ public class FlightsController {
         return flightDayRepository.getFlightRequestDay(id);
     }
 	
-//	@GetMapping("/flights/{id}")
-//    public FlightRequest getFlightInfo(@PathVariable long id) {
-//        return flightRepository.getFlightRequest(id).;
-//    }
 	@RequestMapping(method = RequestMethod.GET, value = "/{id}/filter")
 	@ResponseBody
-	//@GetMapping("/{id}/custom")
-	public ArrayList<FlightRequest> getTest(@PathVariable long id,
+	public ArrayList<FlightRequest> applyFilters(@PathVariable long id,
 			@RequestParam(required = false) Map<String, String> scales,
 			@RequestParam(required = false) Map<String, String> luggage,
 			@RequestParam(required = false) Map<String, String> airline) {
@@ -80,35 +75,8 @@ public class FlightsController {
 		FlightRequestListWeek dayFlight = flightDayRepository.getFlightRequestDay(id);
 		Filters filteredFlights = new Filters(filters,dayFlight.getDayFlights());
 		
-		//		ArrayList<FlightRequest> filter = dayFlight.getDayFlights();
-//		if (luggage !=null && scales!=null) {
-//			luggage.putAll(scales);
-//			return luggage;
-//		}
 		 return filteredFlights.getFilteredFlights();
 	}
-	
-	
-	
-//	public ArrayList<FlightRequest> getFlightInfo(@PathVariable long id,@RequestParam Map<String, String> customQuery) {
-//		
-//		FlightRequestListWeek dayFlight = flightDayRepository.getFlightRequestDay(id);
-//		ArrayList<FlightRequest> filter = dayFlight.getDayFlights();
-//		
-//		return filter;
-//	}
-	
-//    @RequestMapping(method = RequestMethod.GET, value = "/custom")
-//    public String controllerMethod(@RequestParam Map<String, String> customQuery) {
-//
-//        System.out.println("customQuery = brand " + customQuery.containsKey("brand"));
-//        System.out.println("customQuery = limit " + customQuery.containsKey("limit"));
-//        System.out.println("customQuery = price " + customQuery.containsKey("price"));
-//        System.out.println("customQuery = other " + customQuery.containsKey("other"));
-//        System.out.println("customQuery = sort " + customQuery.containsKey("sort"));
-//
-//        return customQuery.toString();
-//    }
 	
 	
 	@PostMapping
@@ -139,18 +107,5 @@ public class FlightsController {
 	public FlightRequestListDayStorage getFlightDayRepository() {
 		return flightDayRepository;
 	}
-//	@GetMapping("/{origin}")
-//    public String getClients(@PathVariable int origin) {
-//		
-//		Destinations dest = new Destinations();
-//        return dest.returnRandomDestinations(origin).toString();
-//    }
 
-//	 @PostMapping("/login")
-//	    public boolean tryToLogin(@RequestBody Client client) throws URISyntaxException {
-//	    	if (client.getPassword() == "bootcamp2" && client.getUsername() == "solera@solera.com") {
-//	    		return true;
-//	    	}
-//	        return false;
-//	    }
 }
