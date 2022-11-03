@@ -47,7 +47,7 @@ function Scales(props: any): ReactElement {
                 <div>
                     {scales.map(
                         (scale: any) => (
-                            <div className="border rounded border-sky-200 m-1">
+                            <div className="border rounded border-sky-200 m-1" key={scale.flightNumber}>
                                 <div className="flex pl-4">
                                     <p className="m-1">Origin: <span className="font-semibold">{scale.location}</span></p>
                                     <p className="m-1">-</p>
