@@ -4,6 +4,7 @@ package flights.generator.FlightRest;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,8 +15,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import flights.generator.Flights.Filters;
 
 
 
@@ -58,15 +63,40 @@ public class FlightsController {
 //    public FlightRequest getFlightInfo(@PathVariable long id) {
 //        return flightRepository.getFlightRequest(id).;
 //    }
-	
-	@GetMapping("/{id}/custom")
-	public ArrayList<FlightRequest> getFlightInfo(@PathVariable long id,@RequestParam Map<String, String> customQuery) {
+	@RequestMapping(method = RequestMethod.GET, value = "/{id}/custom")
+	@ResponseBody
+	//@GetMapping("/{id}/custom")
+	public ArrayList<FlightRequest> getTest(@PathVariable long id,
+			@RequestParam(required = false) Map<String, String> scales,
+			@RequestParam(required = false) Map<String, String> luggage,
+			@RequestParam(required = false) Map<String, String> airline) {
+		
+		Map<String, String> filters = new HashMap<String, String>();
+		
+		if (luggage !=null) filters.putAll(luggage);
+		if (scales!=null) filters.putAll(scales);
+		if (airline!=null) filters.putAll(airline);
 		
 		FlightRequestListWeek dayFlight = flightDayRepository.getFlightRequestDay(id);
-		ArrayList<FlightRequest> filter = dayFlight.getDayFlights();
+		Filters filteredFlights = new Filters(filters,dayFlight.getDayFlights());
 		
-		return filter;
+		//		ArrayList<FlightRequest> filter = dayFlight.getDayFlights();
+//		if (luggage !=null && scales!=null) {
+//			luggage.putAll(scales);
+//			return luggage;
+//		}
+		 return filteredFlights.getFilteredFlights();
 	}
+	
+	
+	
+//	public ArrayList<FlightRequest> getFlightInfo(@PathVariable long id,@RequestParam Map<String, String> customQuery) {
+//		
+//		FlightRequestListWeek dayFlight = flightDayRepository.getFlightRequestDay(id);
+//		ArrayList<FlightRequest> filter = dayFlight.getDayFlights();
+//		
+//		return filter;
+//	}
 	
 //    @RequestMapping(method = RequestMethod.GET, value = "/custom")
 //    public String controllerMethod(@RequestParam Map<String, String> customQuery) {
