@@ -35,7 +35,7 @@ public class PricesController {
 	
 	@PostMapping
     public ResponseEntity createFlightRequestDay(@RequestBody PriceCalculator calculatePrice) throws URISyntaxException {//
-		PriceCalculator finalPrice = new PriceCalculator(calculatePrice);
+		PriceCalculator finalPrice = new PriceCalculator(5,2,1,2,300);
         return ResponseEntity.created(new URI("/price")).body(finalPrice.getFinalPrice());
 		//return ResponseEntity.created(new URI("/flights/day/" + dayFlight.getId())).body(dayFlight);
     }
