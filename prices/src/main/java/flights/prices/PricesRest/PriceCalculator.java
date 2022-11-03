@@ -26,7 +26,12 @@ public class PriceCalculator {
     }
 
     private void calculateFinalPrice(){
-        finalPrice = (adults*basePrice) + (kids * basePrice * 0.4) + (luggage * basePrice * 0.1);
+        double adultTotal = (adults*basePrice);
+        double kidsTotal = (kids * basePrice * 0.4);
+        double luggageTotal = (luggage * basePrice * 0.1);
+        System.out.println(adultTotal+" "+kidsTotal+" "+luggageTotal);
+        
+    	finalPrice =  adultTotal+kidsTotal+luggageTotal;
     }
 
     public int getTotalPassengers() {
