@@ -15,9 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
-
-
-
 @RestController
 @RequestMapping("/destination")
 @CrossOrigin(origins="*")
@@ -25,13 +22,12 @@ public class FlightsController {
 	
 	private final FlightRequestList flightRepository;
 	private final FlightRequestListDayStorage flightDayRepository;
-	
+	private long lastFlightRequestId = 0;
+
 	public FlightsController() {
 		flightRepository = new FlightRequestList();
 		flightDayRepository = new FlightRequestListDayStorage();
 	}
-    
-	public static int value=1;
 	
 	@GetMapping("/getdest/{origin}")
     public List<String> getDestination(@PathVariable int origin) {
@@ -40,26 +36,12 @@ public class FlightsController {
         return dest.initializeDestinations(origin);
     }
 	
-	@GetMapping("/flights/{id}")
-    public FlightRequest getFlight(@PathVariable long id) {
-        return flightRepository.getFlightRequest(id);
-    }
-	
-	@GetMapping("/day/{id}")
-    public FlightRequestListWeek getFlightDay(@PathVariable long id) {
-        return flightDayRepository.getFlightRequestDay(id);
-    }
-	
-//	@GetMapping("/flights/{id}")
-//    public FlightRequest getFlightInfo(@PathVariable long id) {
-//        return flightRepository.getFlightRequest(id).;
-//    }
-	
 	@PostMapping
     public ResponseEntity createFlightRequest(@RequestBody FlightRequest flight) throws URISyntaxException {//
 		FlightRequest savedFlight = new FlightRequest(flight.getDate(),flight.getOrigin(),flight.getDestination());
-		savedFlight.setId((long)(Math.random() * 1000));
 		flightRepository.addFlightRequest(savedFlight);
+		savedFlight.setId(++lastFlightRequestId);
+		lastFlightRequestId = savedFlight.getId();
         return ResponseEntity.created(new URI("/flights/" + savedFlight.getId())).body(savedFlight);
     }
 	
@@ -69,6 +51,19 @@ public class FlightsController {
 		flightDayRepository.addFlightRequestListDay(dayFlight);
         return ResponseEntity.created(new URI("/flights/day/" + dayFlight.getId())).body(dayFlight.getDayFlights());
     }
+
+	public long getLastFlightRequestId() {
+		return lastFlightRequestId;
+	}
+
+	public FlightRequestList getFlightRepository() {
+		return flightRepository;
+	}
+
+	public FlightRequestListDayStorage getFlightDayRepository() {
+		return flightDayRepository;
+	}
+	
 	
 //	@GetMapping("/{origin}")
 //    public String getClients(@PathVariable int origin) {
@@ -84,4 +79,20 @@ public class FlightsController {
 //	    	}
 //	        return false;
 //	    }
+
+
+	// @GetMapping("/flights/{id}")
+    // public FlightRequest getFlight(@PathVariable long id) {
+    //     return flightRepository.getFlightRequest(id);
+    // }
+	
+	// @GetMapping("/day/{id}")
+    // public FlightRequestListWeek getFlightDay(@PathVariable long id) {
+    //     return flightDayRepository.getFlightRequestDay(id);
+    // }
+	
+//	@GetMapping("/flights/{id}")
+//    public FlightRequest getFlightInfo(@PathVariable long id) {
+//        return flightRepository.getFlightRequest(id).;
+//    }
 }

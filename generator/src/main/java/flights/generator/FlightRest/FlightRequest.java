@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import flights.generator.Flights.FlightList;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
@@ -14,9 +15,8 @@ import jakarta.persistence.Table;
 @Table(name = "flight")
 public class FlightRequest {
 
-	
 	@Id
-    @GeneratedValue
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
 	
 	private LocalDate date;

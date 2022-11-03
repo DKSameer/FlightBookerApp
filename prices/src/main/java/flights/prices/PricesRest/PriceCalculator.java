@@ -4,5 +4,6 @@ public class PriceCalculator {
     
     private String people;
     private int ages;
+    // Attributes
 
 }
