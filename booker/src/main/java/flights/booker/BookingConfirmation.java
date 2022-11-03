@@ -1,6 +1,6 @@
 package flights.booker;
 
-import java.time.LocalDate;
+import java.time.YearMonth;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -8,14 +8,14 @@ public class BookingConfirmation {
     
     private String name;
     private String cardNumber;
-    private LocalDate expiryDate;
+    private YearMonth expiryDate;
     private String issue;
     private boolean bookingConfirmed;
     private BookingResponse bookingResponse;
 
     private BookingConfirmation(){}
 
-    public BookingConfirmation(String name, String cardNumber, String expiryDate) {
+    public BookingConfirmation(String name, String cardNumber, YearMonth expiryDate) {
         this.name = name;
         this.cardNumber = cardNumber;
         this.expiryDate = expiryDate;
@@ -37,7 +37,7 @@ public class BookingConfirmation {
         } else if (cardNumber.length() != 16){
             issue = "Card number of incorrect length";
             bookingConfirmed = false;
-        } else if (expiryDate.isBefore(LocalDate.now())){
+        } else if (expiryDate.isBefore(YearMonth.now())){
             issue = "Card has already expired";
             bookingConfirmed = false;
         }
@@ -65,14 +65,6 @@ public class BookingConfirmation {
         this.cardNumber = cardNumber;
     }
 
-    public LocalDate getExpiryDate() {
-        return expiryDate;
-    }
-
-    public void setExpiryDate(LocalDate expiryDate) {
-        this.expiryDate = expiryDate;
-    }
-
     public String getIssue() {
         return issue;
     }
@@ -96,5 +88,13 @@ public class BookingConfirmation {
     public void setBookingResponse(BookingResponse bookingResponse) {
         this.bookingResponse = bookingResponse;
     }
+
+	public YearMonth getExpiryDate() {
+		return expiryDate;
+	}
+
+	public void setExpiryDate(YearMonth expiryDate) {
+		this.expiryDate = expiryDate;
+	}
 
 }
