@@ -107,7 +107,7 @@ export default function FlightDetails(): ReactElement {
         axios.post("http://localhost:8080/destination/day", flight_details).
         then((response) => {
             setCurrentQueryId(response.data.id);
-            setFlights(response.data);
+            setFlights(response.data.dayFlights);
         })
         Router.push("/flights");
         return;

@@ -89,7 +89,7 @@ export default function PassengerC(props: {p_data: any}): ReactElement {
                     />
                 </div>
                 <div className="w-fit m-4 mb-0">
-                    <p>Surame</p>
+                    <p>Surname</p>
                     <input
                         type="text"
                         className="block w-6/7 px-4 py-2 border rounded-md"
