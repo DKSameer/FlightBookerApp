@@ -108,6 +108,7 @@ export default function FlightDetails(): ReactElement {
         then((response) => {
             setCurrentQueryId(response.data.id);
             setFlights(response.data.dayFlights);
+            console.log(response.data);
         })
         Router.push("/flights");
         return;

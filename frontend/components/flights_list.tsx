@@ -80,7 +80,7 @@ export default function FlightsList(): ReactElement {
     }
 
     return (
-        <div className="flex flex-col justify-center items-center px-10">
+        <div className="flex flex-col flex-wrap justify-center items-center px-10">
             <div className="font-semibold m-4 mb-1">Available Flights</div>
                 <div className="flex flex-col mt-8">
                     <div id="filter_wrapper" className="flex flex-row w-full justify-center">
@@ -126,22 +126,23 @@ export default function FlightsList(): ReactElement {
                     {flights.map(
                         (flight: any) => (
                             <Link href="/information" key={flight.id} className="flex justify-center items-center bg-sky-300 hover:bg-sky-400 w-2/3 p-2 m-4 select-none text-gray-800 hover:cursor-pointer border rounded border-sky-300">
-                                    <div>
-                                        <p className="m-1">Flight: <span className="font-semibold">{flight.id}</span></p>
-                                        <div className="border rounded border-sky-200 m-1 hover:bg-sky-300">
-                                            <div className="flex">
-                                                <p className="m-1">Origin: <span className="font-semibold">{flight.origin}</span></p>
-                                                <p className="m-1">-</p>
-                                                <p className="m-1">Destination: <span className="font-semibold">{flight.destination}</span></p>
-                                            </div>
-                                            {<SingleFlight layover={flight.flightList.totalLayover} airline={flight.flightList.list[0].airline}></SingleFlight>}
+                                <div>
+                                    <p className="m-1">Flight: <span className="font-semibold">{flight.id}</span></p>
+                                    <div className="border rounded border-sky-200 m-1 hover:bg-sky-300">
+                                        <div className="flex">
+                                            <p className="m-1">Origin: <span className="font-semibold">{flight.origin}</span></p>
+                                            <p className="m-1">-</p>
+                                            <p className="m-1">Destination: <span className="font-semibold">{flight.destination}</span></p>
                                         </div>
-                                        <div>
-                                            {<Scales layover={flight.flightList.totalLayover} scales_list={flight.flightList.list}></Scales>}
-                                        </div>
-                                        <p className="m-1">Departure: <span className="font-semibold">{flight.flightList.date}</span></p>
-                                        <p className="m-1">Price: <span className="font-semibold">{flight.flightList.totalPrice}€</span></p>
+                                        {<SingleFlight layover={flight.flightList.totalLayover} airline={flight.flightList.list[0].airline}></SingleFlight>}
                                     </div>
+                                    <div>
+                                        {<Scales layover={flight.flightList.totalLayover} scales_list={flight.flightList.list}></Scales>}
+                                    </div>
+                                    <p className="m-1">Departure: <span className="font-semibold">{flight.flightList.date}</span></p>
+                                    <p className="m-1">Luggage: <span className="font-semibold">{flight.flightList.allowLuggage ? "Yes" : "No"}</span></p>
+                                    <p className="m-1">Price: <span className="font-semibold">{flight.flightList.totalPrice}€</span></p>
+                                </div>
                             </Link>
                         ))}
                 </div>
