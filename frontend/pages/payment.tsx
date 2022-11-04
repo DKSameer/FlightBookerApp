@@ -60,6 +60,7 @@ export default function Payment() {
                 <div className="w-fit m-4 mb-0">
                     <p>Name</p>
                     <input
+                        id="name"
                         type="text"
                         className="block w-6/7 px-4 py-2 border rounded-md"
                         onChange={on_name_change}
@@ -68,6 +69,7 @@ export default function Payment() {
                 <div className="w-fit m-4 mb-0">
                     <p>Card Number</p>
                     <input
+                        id="cardNumber"
                         type="text"
                         className="block w-6/7 px-4 py-2 border rounded-md"
                         onChange={on_card_number_change}
@@ -79,6 +81,7 @@ export default function Payment() {
                         <div>
                             <p>Month</p>
                             <input
+                                id="month"
                                 type="text"
                                 className="block w-1/2 px-4 py-2 border rounded-md"
                                 onChange={on_expire_date_month_change}
@@ -87,6 +90,7 @@ export default function Payment() {
                         <div>
                             <p>Year</p>
                             <input
+                                id="year"
                                 type="text"
                                 className="block w-1/2 px-4 py-2 border rounded-md"
                                 onChange={on_expire_date_year_change}
@@ -96,7 +100,7 @@ export default function Payment() {
                 </div>
                 <div className="flex flex-row justify-center items-center">
                     <div className="flex justify-center items-center w-fit h-fit p-2 border rounded hover:bg-sky-400 hover:cursor-pointer mx-4 mb-1 font-semibold mt-10 bg-sky-300">
-                        <button onClick={execute_payment}>Submit</button>
+                        <button id="submit" onClick={execute_payment}>Submit</button>
                     </div>
                 </div>
             </div>
