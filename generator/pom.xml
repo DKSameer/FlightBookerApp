@@ -52,6 +52,13 @@
 		    <groupId>org.springframework.data</groupId>
 		    <artifactId>spring-data-jpa</artifactId>
 		  </dependency>
+		  <dependency>
+			  <groupId>io.rest-assured</groupId>
+			  <artifactId>rest-assured</artifactId>
+			  <version>5.2.0</version>
+			  <scope>test</scope>
+		  </dependency>
+		  
 	</dependencies>
 	
 	<build>

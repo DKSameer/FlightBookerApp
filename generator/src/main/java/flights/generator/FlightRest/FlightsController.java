@@ -64,13 +64,15 @@ public class FlightsController {
 	public ArrayList<FlightRequest> applyFilters(@PathVariable long id,
 			@RequestParam(required = false) Map<String, String> scales,
 			@RequestParam(required = false) Map<String, String> luggage,
-			@RequestParam(required = false) Map<String, String> airline) {
+			@RequestParam(required = false) Map<String, String> airline,
+			@RequestParam(required = false) Map<String, String> date) {
 		
 		Map<String, String> filters = new HashMap<String, String>();
 		
 		if (luggage !=null) filters.putAll(luggage);
 		if (scales!=null) filters.putAll(scales);
 		if (airline!=null) filters.putAll(airline);
+		if (date!=null) filters.putAll(date);
 		
 		FlightRequestListWeek dayFlight = flightDayRepository.getFlightRequestDay(id);
 		Filters filteredFlights = new Filters(filters,dayFlight.getDayFlights());
