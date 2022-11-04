@@ -74,6 +74,31 @@ public class TestNG {
 		WebElement searchFlight = driver.findElement(By.id("search"));
 		searchFlight.click();
 	}
+	
+	public void insertDetailsOfPassenger(String passengerName,String passengerSurname,String passengerNationality,String passengerIdentification) {
+		WebElement name =  driver.findElements(By.xpath("//input[@id='name']")).get(0); 
+		WebElement surname = driver.findElements(By.xpath("//input[@id='surname']")).get(0); 
+		WebElement nationality = driver.findElements(By.xpath("//input[@id='nationality']")).get(0); 
+		WebElement identification = driver.findElements(By.xpath("//input[@id='identification']")).get(0); 
+		WebElement age = driver.findElements(By.xpath("//select[@id='age']")).get(0); 
+		WebElement bags = driver.findElements(By.xpath("//select[@id='bags']")).get(0); 
+		
+		name.sendKeys(passengerName);
+		surname.sendKeys(passengerSurname);
+		nationality.sendKeys(passengerNationality);
+		identification.sendKeys(passengerIdentification);
+		age.click();
+		
+		WebElement agePicker = driver.findElements(By.xpath("//option[contains(text(),'Between 2 and 9 years (inclusive)')]")).get(0);
+		agePicker.click();
+		bags.click();
+		WebElement bagPicker = driver.findElements(By.xpath("//option[contains(text(),'Yes')]")).get(0);
+		bagPicker.click();
+		WebElement saveButton = driver.findElements(By.xpath("//button[@id='save']")).get(0); 
+		saveButton.click();
+		WebElement bookButton = driver.findElements(By.xpath("//button[contains(text(),'Book')]")).get(0);
+		bookButton.click();
+	}
 //	@Parameters({"calcs","result"})
 //	@Test
 //	public void runTestCalculator(@Optional("2+3") String text,@Optional("5") String result){
@@ -99,6 +124,9 @@ public class TestNG {
 		WebElement available = driver.findElement(By.xpath("//div[contains(text(),'Available Flights')]"));
 		Assert.assertEquals(available.getText(),result);
 	}
+	
+
+	
 	//@Parameters({"login","pass","city","day","result"})
 	@Test
 	public void testInsertingUsersInformation() throws InterruptedException {
@@ -109,31 +137,21 @@ public class TestNG {
 		WebElement flight = driver.findElement(By.xpath("//body/div[@id='__next']/div[@id='app_wrapper']/main[1]/div[1]/div[3]/a[1]"));
 		flight.click();
 		Thread.sleep(1000);
-		WebElement name =  driver.findElements(By.xpath("//input[@id='name']")).get(0); 
-		WebElement surname = driver.findElements(By.xpath("//input[@id='surname']")).get(0); 
-		WebElement nationality = driver.findElements(By.xpath("//input[@id='nationality']")).get(0); 
-		WebElement identification = driver.findElements(By.xpath("//input[@id='identification']")).get(0); 
-		WebElement age = driver.findElements(By.xpath("//select[@id='age']")).get(0); 
-		WebElement bags = driver.findElements(By.xpath("//select[@id='bags']")).get(0); 
-		
-		name.sendKeys("Eric");
-		surname.sendKeys("Damiani");
-		nationality.sendKeys("Brazilian");
-		identification.sendKeys("YEA123632342");
-		age.click();
-		WebElement agePicker = driver.findElements(By.xpath("//option[contains(text(),'Between 2 and 9 years (inclusive)')]")).get(0);
-		agePicker.click();
-		
-		bags.click();
-		WebElement bagPicker = driver.findElements(By.xpath("//option[contains(text(),'Yes')]")).get(0);
-		bagPicker.click();
-		
-		WebElement saveButton = driver.findElements(By.xpath("//button[@id='save']")).get(0); 
-		saveButton.click();
-		
-		WebElement bookButton = driver.findElements(By.xpath("//button[contains(text(),'Book')]")).get(0);
-		bookButton.click();
-		Thread.sleep(2000);
+		insertDetailsOfPassenger("Eric","Damiani","Brazilian","RYS1736187253");
+		Thread.sleep(1000);
+		WebElement cardName = driver.findElement(By.id("name"));
+		WebElement cardNumber = driver.findElement(By.id("cardNumber"));
+		WebElement cardMonth = driver.findElement(By.id("month"));
+		WebElement cardYear = driver.findElement(By.id("year"));
+		WebElement submitButton = driver.findElement(By.id("submit"));
+		cardName.sendKeys("Eric Damiani Rozati");
+		cardNumber.sendKeys("1234567890876543");
+		cardMonth.sendKeys("05");
+		cardYear.sendKeys("23");
+		submitButton.click();
+		Thread.sleep(1000);
+		WebElement confirmation = driver.findElement(By.xpath("/html[1]/body[1]/div[1]/div[1]/main[1]/div[1]/div[2]/p[1]"));
+		Assert.assertEquals(confirmation.getText(),"Payment information verified successfully");
 	}
 	
 	

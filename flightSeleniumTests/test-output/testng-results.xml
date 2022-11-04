@@ -2,28 +2,28 @@
 <testng-results ignored="0" total="2" passed="2" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2022-11-04T15:26:58 CET" name="Default suite" finished-at="2022-11-04T15:27:09 CET" duration-ms="11578">
+  <suite started-at="2022-11-04T16:02:01 CET" name="Default suite" finished-at="2022-11-04T16:02:13 CET" duration-ms="11725">
     <groups>
     </groups>
-    <test started-at="2022-11-04T15:26:58 CET" name="Default test" finished-at="2022-11-04T15:27:09 CET" duration-ms="11578">
+    <test started-at="2022-11-04T16:02:01 CET" name="Default test" finished-at="2022-11-04T16:02:13 CET" duration-ms="11725">
       <class name="testing.TestNG">
-        <test-method is-config="true" signature="setUp()[pri:0, instance:testing.TestNG@5119fb47]" started-at="2022-11-04T15:26:58 CET" name="setUp" finished-at="2022-11-04T15:26:59 CET" duration-ms="1771" status="PASS">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:testing.TestNG@7193666c]" started-at="2022-11-04T16:02:01 CET" name="setUp" finished-at="2022-11-04T16:02:03 CET" duration-ms="1584" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="testInsertingUsersInformation()[pri:0, instance:testing.TestNG@5119fb47]" started-at="2022-11-04T15:26:59 CET" name="testInsertingUsersInformation" finished-at="2022-11-04T15:27:05 CET" duration-ms="5892" status="PASS">
+        <test-method signature="testInsertingUsersInformation()[pri:0, instance:testing.TestNG@7193666c]" started-at="2022-11-04T16:02:03 CET" name="testInsertingUsersInformation" finished-at="2022-11-04T16:02:09 CET" duration-ms="6219" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testInsertingUsersInformation -->
-        <test-method is-config="true" signature="close()[pri:0, instance:testing.TestNG@5119fb47]" started-at="2022-11-04T15:27:05 CET" name="close" finished-at="2022-11-04T15:27:06 CET" duration-ms="243" status="PASS">
+        <test-method is-config="true" signature="close()[pri:0, instance:testing.TestNG@7193666c]" started-at="2022-11-04T16:02:09 CET" name="close" finished-at="2022-11-04T16:02:09 CET" duration-ms="184" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- close -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:testing.TestNG@5119fb47]" started-at="2022-11-04T15:27:06 CET" name="setUp" finished-at="2022-11-04T15:27:07 CET" duration-ms="1163" status="PASS">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:testing.TestNG@7193666c]" started-at="2022-11-04T16:02:09 CET" name="setUp" finished-at="2022-11-04T16:02:10 CET" duration-ms="1089" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="testSelectFlight(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)[pri:0, instance:testing.TestNG@5119fb47]" started-at="2022-11-04T15:27:07 CET" name="testSelectFlight" finished-at="2022-11-04T15:27:09 CET" duration-ms="2359" status="PASS">
+        <test-method signature="testSelectFlight(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)[pri:0, instance:testing.TestNG@7193666c]" started-at="2022-11-04T16:02:10 CET" name="testSelectFlight" finished-at="2022-11-04T16:02:13 CET" duration-ms="2428" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -54,7 +54,7 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testSelectFlight -->
-        <test-method is-config="true" signature="close()[pri:0, instance:testing.TestNG@5119fb47]" started-at="2022-11-04T15:27:09 CET" name="close" finished-at="2022-11-04T15:27:09 CET" duration-ms="121" status="PASS">
+        <test-method is-config="true" signature="close()[pri:0, instance:testing.TestNG@7193666c]" started-at="2022-11-04T16:02:13 CET" name="close" finished-at="2022-11-04T16:02:13 CET" duration-ms="187" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- close -->
