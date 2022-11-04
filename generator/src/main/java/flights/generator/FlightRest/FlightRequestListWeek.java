@@ -40,8 +40,7 @@ public class FlightRequestListWeek {
 		for (int i=-3; i<4;i++) {
 			int flightsOnTheDay = (int) Math.floor((Math.random() * 3)+2);
 		for (int j = 0; j<flightsOnTheDay;j++) {
-			dayFlights.add(createRandomFlight(flight,chosenDate.plusDays(i)));
-			dayFlights.add(createRandomFlightBack(flight,chosenDate.plusDays(i+7)));
+			dayFlights.add(createRandomFlightBack(flight,chosenDate.plusDays(i)));
 		}
 		}
 		return dayFlights;
@@ -72,7 +71,7 @@ public class FlightRequestListWeek {
 	}
 	
 	public FlightRequest createRandomFlightBack(FlightRequest flight,LocalDate date) {
-		FlightRequest savedFlight = new FlightRequest(date,flight.getDestination(),flight.getOrigin());
+		FlightRequest savedFlight = new FlightRequest(date,flight.getDestination(),flight.getOrigin(),true);
 		savedFlight.setId((long)(Math.random() * 10000));
 		return savedFlight;
 	}
