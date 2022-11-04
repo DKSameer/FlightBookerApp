@@ -12,14 +12,13 @@ public class BookingConfirmation {
     private String issue;
     private boolean bookingConfirmed;
     private BookingResponse bookingResponse;
-
+    
     private BookingConfirmation(){}
 
     public BookingConfirmation(String name, String cardNumber, YearMonth expiryDate) {
         this.name = name;
         this.cardNumber = cardNumber;
         this.expiryDate = expiryDate;
-        System.out.println(this.expiryDate);
         this.bookingConfirmed = true;
         confirmBookingDetails();
         if(bookingConfirmed){
@@ -35,7 +34,7 @@ public class BookingConfirmation {
             issue = "Illegal characters in name";
             bookingConfirmed = false;
         } else if (cardNumber.length() != 16){
-            issue = "Card number of incorrect length";
+            issue = "Invalid card number";
             bookingConfirmed = false;
         } else if (expiryDate.isBefore(YearMonth.now())){
             issue = "Card has already expired";
