@@ -44,7 +44,7 @@ export default function Login() {
 
     return (
         <Layout>
-            <div className="flex flex-col justify-center items-center">
+            <div className="flex flex-col justify-center items-center p-4">
                 <div>
                     <p className="font-semibold text-xl">Login</p>
                 </div>

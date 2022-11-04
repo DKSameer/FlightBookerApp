@@ -55,7 +55,7 @@ export default function Payment() {
         <Layout>
             <div className="flex flex-col justify-center items-center">
                 <div>
-                    <p className="font-semibold text-xl">Login</p>
+                    <p className="font-semibold text-xl">Payment</p>
                 </div>
                 <div className="w-fit m-4 mb-0">
                     <p>Name</p>
