@@ -27,6 +27,19 @@ public class FlightRequest {
 	public FlightRequest() {
 	}
 	
+	public FlightRequest(LocalDate date, String origin, String destination,boolean b) {
+		super();
+		this.date = date;
+		this.origin = origin;
+		this.destination = destination;
+		if (origin == null || destination == null ||date == null) {
+            throw new IllegalArgumentException("FlightRequest constructor cannot contain null arguments");
+        }
+		flightList = new FlightList(date,origin,destination,b);
+		//call generate flightlist
+	}
+	
+	
 	public FlightRequest(LocalDate date, String origin, String destination) {
 		super();
 		this.date = date;

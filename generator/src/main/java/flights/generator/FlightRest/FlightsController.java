@@ -92,12 +92,21 @@ public class FlightsController {
 	
 	//Body needed for this post is : {"date" : "2022-04-23", "origin" : "Sao Paulo","destination" : "Madrid"}
 	
-	@PostMapping("/day")
-    public ResponseEntity createFlightRequestDay(@RequestBody FlightRequest flight) throws URISyntaxException {//
-		FlightRequestListWeek dayFlight = new FlightRequestListWeek(flight);
-		flightDayRepository.addFlightRequestListDay(dayFlight);
+	@PostMapping("/day/{type}")
+    public ResponseEntity createFlightRequestDay(@RequestBody FlightRequest flight,@PathVariable String type) throws URISyntaxException {//
+		FlightRequestListWeek dayFlight;
+		if (type.equals("oneway")) {
+			dayFlight = new FlightRequestListWeek(flight);
+			flightDayRepository.addFlightRequestListDay(dayFlight);
+			return ResponseEntity.created(new URI("/destination/day/" + dayFlight.getId())).body(dayFlight);
+		}
+		if (type.equals("roundtrip")) {
+			dayFlight = new FlightRequestListWeek(flight,true);
+			flightDayRepository.addFlightRequestListDay(dayFlight);
+			return ResponseEntity.created(new URI("/destination/day/" + dayFlight.getId())).body(dayFlight);
+		}
 		//return ResponseEntity.created(new URI("/destination/day/" + dayFlight.getId())).body(dayFlight.getDayFlights());
-		return ResponseEntity.created(new URI("/destination/day/" + dayFlight.getId())).body(dayFlight);
+		return ResponseEntity.created(new URI("/error")).body("Not a valid trip option");
     }
 	
 	public long getLastFlightRequestId() {

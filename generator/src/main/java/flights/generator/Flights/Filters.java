@@ -94,7 +94,7 @@ public class Filters {
 	private ArrayList<FlightRequest> filterByDate(ArrayList<FlightRequest> inputArray) {
 		ArrayList<FlightRequest> newArray = new ArrayList<FlightRequest>();
 		for (int i = 0; i < inputArray.size(); i++) {
-			if (inputArray.get(i).getFlightList().getDate() == date) {
+			if (inputArray.get(i).getFlightList().getDate().compareTo(date) == 0) {
 				newArray.add(inputArray.get(i));
 			}
 		}
@@ -128,7 +128,7 @@ public class Filters {
 
 	private void setDateFilter() {
 		LocalDate tempDate = null;
-		if (filter.get("luggage") != null) {
+		if (filter.get("date") != null) {
 			tempDate = LocalDate.parse(filter.get("date"));
 		}
 		this.date = tempDate;
