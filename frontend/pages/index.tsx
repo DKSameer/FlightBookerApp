@@ -15,12 +15,19 @@ export default function Login() {
     }
 
     function on_password_change(event: React.ChangeEvent<HTMLInputElement>): void{
-        setLoggedUsername(event.target.value);
+        setLoggedPassword(event.target.value);
         return;
     }
 
     function execute_login(): void{
-        console.log("executing login");
+        if(logged_username === ""){
+            alert("Username is a mandatory field");
+            return;
+        }
+        if(logged_password === ""){
+            alert("Password is a mandatory field");
+            return;
+        }
         /* 
             Validate login data..
         */
@@ -52,7 +59,7 @@ export default function Login() {
                 <div className="w-fit m-4 mb-0">
                     <p>Password</p>
                     <input
-                        type="text"
+                        type="password"
                         className="block w-6/7 px-4 py-2 border rounded-md"
                         onChange={on_password_change}
                     />

@@ -3,11 +3,15 @@ import { ReactElement, useState } from "react";
 import Passenger from "./passenger";
 import { PassengerClass, Age } from "./passenger";
 import Router from 'next/router';
+import axios from "axios";
+import { useRouter } from 'next/router';
 
 let passengers: Array<PassengerClass> = new Array<PassengerClass>();
 
 export default function PassengersInformation(): ReactElement {
     const [number_of_passengers_array, setNumberOfPassengersArray] = useState<Array<number>>(new Array<number>());
+
+    const flight_price = useRouter().query.price;
 
     function on_number_of_passengers_change(event: React.ChangeEvent<HTMLInputElement>): void{
         let x = new Array<number>();
@@ -34,13 +38,35 @@ export default function PassengersInformation(): ReactElement {
             if(!containsPassenger(name)){
                 passengers.push(new PassengerClass(name, surname, nationality, identification, age, bags));
             }
+            console.log(passengers);
             return;
     }
 
+    function passengers_info_request_object(): any{
+        let babies = 0;
+        let kids = 0;
+        let luggages = 0;
+        for(let i: number = 0; i<passengers.length; i++){
+            if(passengers[i].bags){
+                luggages++;
+            }
+            if(passengers[i].age === Age.LessThan2){
+                babies++;
+            }
+            if(passengers[i].age === Age.Between2And9){
+                kids++;
+            }
+        }
+        return {totalPassengers: passengers.length, luggages: luggages, kids: kids, babies: babies, basePrice: flight_price};
+    }
+
     function book_flight(): void{
-        /* 
-            TODO: paste passengers information to API
-        */
+        const passengers_information = passengers_info_request_object();
+        console.log(passengers_information);
+        axios.post(`http://localhost:8082/price`, passengers_information).
+        then((response) => {
+            console.log(response.data);
+        })
         Router.push("/booking");
         return;
     }
