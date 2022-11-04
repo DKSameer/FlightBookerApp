@@ -108,13 +108,32 @@ public class TestNG {
 		Thread.sleep(1000);
 		WebElement flight = driver.findElement(By.xpath("//body/div[@id='__next']/div[@id='app_wrapper']/main[1]/div[1]/div[3]/a[1]"));
 		flight.click();
-		Thread.sleep(3000);
+		Thread.sleep(1000);
 		WebElement name =  driver.findElements(By.xpath("//input[@id='name']")).get(0); 
 		WebElement surname = driver.findElements(By.xpath("//input[@id='surname']")).get(0); 
-//		WebElement nationality = driver.findElements(By.xpath("//*[contains(@id, ‘nationality’)")).get(0); 
-//		WebElement identification = driver.findElements(By.xpath("//*[contains(@id, ‘identification’)")).get(0); 
-//		WebElement age = driver.findElements(By.xpath("//*[contains(@id, ‘age’)")).get(0); 
-//		WebElement bags = driver.findElements(By.xpath("//*[contains(@id, ‘bags’)")).get(0); 
+		WebElement nationality = driver.findElements(By.xpath("//input[@id='nationality']")).get(0); 
+		WebElement identification = driver.findElements(By.xpath("//input[@id='identification']")).get(0); 
+		WebElement age = driver.findElements(By.xpath("//select[@id='age']")).get(0); 
+		WebElement bags = driver.findElements(By.xpath("//select[@id='bags']")).get(0); 
+		
+		name.sendKeys("Eric");
+		surname.sendKeys("Damiani");
+		nationality.sendKeys("Brazilian");
+		identification.sendKeys("YEA123632342");
+		age.click();
+		WebElement agePicker = driver.findElements(By.xpath("//option[contains(text(),'Between 2 and 9 years (inclusive)')]")).get(0);
+		agePicker.click();
+		
+		bags.click();
+		WebElement bagPicker = driver.findElements(By.xpath("//option[contains(text(),'Yes')]")).get(0);
+		bagPicker.click();
+		
+		WebElement saveButton = driver.findElements(By.xpath("//button[@id='save']")).get(0); 
+		saveButton.click();
+		
+		WebElement bookButton = driver.findElements(By.xpath("//button[contains(text(),'Book')]")).get(0);
+		bookButton.click();
+		Thread.sleep(2000);
 	}
 	
 	
