@@ -24,7 +24,7 @@ public class BookerController {
 	}
 
 	@PostMapping
-    public ResponseEntity sendBooking(@RequestBody BookingInput bookingInput) throws URISyntaxException {//
+    public ResponseEntity confirmBooking(@RequestBody BookingInput bookingInput) throws URISyntaxException {//
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/yy");
 		YearMonth parsedDate = YearMonth.parse(bookingInput.getExpiryDate(),formatter);
 		BookingConfirmation confirmation = new BookingConfirmation(bookingInput.getName(),bookingInput.getCardNumber(),parsedDate);

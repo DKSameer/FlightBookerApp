@@ -54,9 +54,7 @@ public class FlightList {
 		String destination = this.destination;
 		this.destination= origin;
 		this.origin= destination;
-		System.out.println(date);
 		date= date.plusDays((int) Math.floor((Math.random() * 8)+2));
-		System.out.println(date);
 		addFlightsToList(numberOfFlights);
 		return list;
 	}
@@ -117,7 +115,6 @@ public class FlightList {
 
 	private Flight createFlight(String origin,String destination) {
 		Flight flight;
-		System.out.println(origin + " " + destination + " "+date);
 		flight = new Flight(origin, destination, date);
 
 		return flight;
