@@ -6,6 +6,7 @@
       <class name="testing.TestNG">
         <methods>
           <include name="testInsertingUsersInformation"/>
+          <include name="testSelectFlight" invocation-numbers="0"/>
           <include name="setUp"/>
           <include name="close"/>
         </methods>
