@@ -30,8 +30,33 @@ public class FlightList {
 		scales= numberOfFlights-1;
 	}
 
+	public FlightList(LocalDate date2, String origin2, String destination2, boolean b) {
+		this.date = date2;
+		this.origin = origin2;
+		this.destination = destination2;
+		generateFlightsAndBack();
+		allowLuggage=checkAllowLuggage();
+		totalPrice = calculateTotalPrice();
+		totalDuration = calculateTotalDuration();
+		scales= numberOfFlights-1;
+	}
+
 	public ArrayList<Flight> generateFlights() {
 		numberOfFlights = (int)((Math.random() * 3) +1);
+		addFlightsToList(numberOfFlights);
+		return list;
+	}
+	
+	public ArrayList<Flight> generateFlightsAndBack() {
+		numberOfFlights = (int)((Math.random() * 3) +1);
+		addFlightsToList(numberOfFlights);
+		String origin = this.origin;
+		String destination = this.destination;
+		this.destination= origin;
+		this.origin= destination;
+		System.out.println(date);
+		date= date.plusDays((int) Math.floor((Math.random() * 8)+2));
+		System.out.println(date);
 		addFlightsToList(numberOfFlights);
 		return list;
 	}
@@ -92,7 +117,9 @@ public class FlightList {
 
 	private Flight createFlight(String origin,String destination) {
 		Flight flight;
+		System.out.println(origin + " " + destination + " "+date);
 		flight = new Flight(origin, destination, date);
+
 		return flight;
 		
 	}
