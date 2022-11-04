@@ -30,7 +30,24 @@ public class FlightList {
 		scales= numberOfFlights-1;
 	}
 
+	public FlightList(LocalDate date2, String origin2, String destination2, boolean b) {
+		this.date = date;
+		this.origin = origin;
+		this.destination = destination;
+		generateFlightsAndBack();
+		allowLuggage=checkAllowLuggage();
+		totalPrice = calculateTotalPrice();
+		totalDuration = calculateTotalDuration();
+		scales= numberOfFlights-1;
+	}
+
 	public ArrayList<Flight> generateFlights() {
+		numberOfFlights = (int)((Math.random() * 3) +1);
+		addFlightsToList(numberOfFlights);
+		return list;
+	}
+	
+	public ArrayList<Flight> generateFlightsAndBack() {
 		numberOfFlights = (int)((Math.random() * 3) +1);
 		addFlightsToList(numberOfFlights);
 		return list;

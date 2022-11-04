@@ -13,6 +13,11 @@ public class FlightRequestListWeek {
 		id = (long) Math.floor((Math.random() * 1000)+1);
 	}
 	
+	public FlightRequestListWeek(FlightRequest flight,boolean b) {
+		//dayFlights = returnAllFlightsForDay(flight);
+		dayFlights = FlightRequestListWeekAndBack(flight);
+		id = (long) Math.floor((Math.random() * 1000)+1);
+	}
 //	public ArrayList<FlightRequest> returnAllFlightsForDay(FlightRequest flight){
 //		ArrayList<FlightRequest> dayFlights = new ArrayList<FlightRequest>();
 //		
@@ -24,6 +29,24 @@ public class FlightRequestListWeek {
 //	}
 	
 	
+	public ArrayList<FlightRequest> FlightRequestListWeekAndBack(FlightRequest flight) {
+		ArrayList<FlightRequest> dayFlights = new ArrayList<FlightRequest>();
+		// If date chosen is in the past, show results for the newest 7 days
+		LocalDate chosenDate = flight.getDate();
+		LocalDate today = LocalDate.now();
+		if(today.isAfter(chosenDate)){
+			chosenDate = today.plusDays(3);
+		}
+		for (int i=-3; i<4;i++) {
+			int flightsOnTheDay = (int) Math.floor((Math.random() * 3)+2);
+		for (int j = 0; j<flightsOnTheDay;j++) {
+			dayFlights.add(createRandomFlight(flight,chosenDate.plusDays(i)));
+			dayFlights.add(createRandomFlightBack(flight,chosenDate.plusDays(i+7)));
+		}
+		}
+		return dayFlights;
+	}
+
 	public ArrayList<FlightRequest> returnAllFlightsForWeek(FlightRequest flight){
 		ArrayList<FlightRequest> dayFlights = new ArrayList<FlightRequest>();
 		// If date chosen is in the past, show results for the newest 7 days
@@ -44,6 +67,12 @@ public class FlightRequestListWeek {
 	
 	public FlightRequest createRandomFlight(FlightRequest flight,LocalDate date) {
 		FlightRequest savedFlight = new FlightRequest(date,flight.getOrigin(),flight.getDestination());
+		savedFlight.setId((long)(Math.random() * 10000));
+		return savedFlight;
+	}
+	
+	public FlightRequest createRandomFlightBack(FlightRequest flight,LocalDate date) {
+		FlightRequest savedFlight = new FlightRequest(date,flight.getDestination(),flight.getOrigin());
 		savedFlight.setId((long)(Math.random() * 10000));
 		return savedFlight;
 	}
