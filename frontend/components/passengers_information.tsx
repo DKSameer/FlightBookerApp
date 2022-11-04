@@ -70,7 +70,7 @@ export default function PassengersInformation(): ReactElement {
                 kids++;
             }
         }
-        return {totalPassengers: passengers.length, luggages: luggages, kids: kids, babies: babies, basePrice: flight_base_price};
+        return {totalPassengers: passengers.length, luggage: luggages, kids: kids, babies: babies, basePrice: flight_base_price};
     }
 
     function update_total_price(): void{
