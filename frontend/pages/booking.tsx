@@ -6,7 +6,6 @@ import Layout from '../components/layout';
 */
 export default function Booking() {
     const booking_confirmation = useRouter().query.booking_confirmation;
-    console.log(booking_confirmation);
     const booking_status_message = useRouter().query.booking_status;
 
     return (

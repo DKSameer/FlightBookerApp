@@ -75,7 +75,7 @@ export default function FlightsList(): ReactElement {
     }
 
     function on_scales_filter_change(event: React.ChangeEvent<HTMLSelectElement>): void{
-        setLuggageFilter(event.target.value);
+        setScalesFilter(event.target.value);
         return;
     }
 

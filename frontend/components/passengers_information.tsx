@@ -63,10 +63,7 @@ export default function PassengersInformation(): ReactElement {
     function book_flight(): void{
         const passengers_information = passengers_info_request_object();
         console.log(passengers_information);
-        axios.post(`http://localhost:8082/price`, passengers_information).
-        then((response) => {
-            console.log(response.data);
-        })
+        axios.post(`http://localhost:8082/price`, passengers_information)
         Router.push("/payment");
         return;
     }

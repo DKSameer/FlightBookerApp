@@ -43,8 +43,10 @@ export default function Payment() {
         }
         axios.post(`http://localhost:8081/book`, {name: name, cardNumber: card_number, expiryDate:expire_date_month+"/"+expire_date_year}).
         then((response) => {
-            console.log(response.data);
             Router.push({pathname:"/booking", query:{booking_confirmation: response.data.bookingConfirmed, booking_status: response.data.message}});
+        }).
+        catch((error) => {
+            alert(error.response.data.message);
         })
        return;
     }
