@@ -67,7 +67,7 @@ export default function PassengersInformation(): ReactElement {
         then((response) => {
             console.log(response.data);
         })
-        Router.push("/booking");
+        Router.push("/payment");
         return;
     }
 

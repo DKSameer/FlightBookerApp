@@ -1,15 +1,20 @@
+import { useRouter } from 'next/router';
 import Layout from '../components/layout';
-import PassengersInformation from '../components/passengers_information';
+
 /* 
-    Passengers information page
+    Booking status page
 */
-export default function Information() {
+export default function Booking() {
+    const booking_confirmation = useRouter().query.booking_confirmation;
+    console.log(booking_confirmation);
+    const booking_status_message = useRouter().query.booking_status;
+
     return (
         <Layout>
             <div className="flex flex-col justify-center items-center">
-                <div className="font-semibold m-4">Booking Information</div>
+                <div className="font-semibold m-4">Booking {booking_confirmation === "true" ? "confirmed!" : "could not be processed."}</div>
                 <div className="m-4">
-                    <p>{Math.random() < .7 ? "Successfully booked!" : "Could not book the chosen flight :("}</p>
+                    <p>{booking_status_message}</p>
                 </div>
             </div>
         </Layout>
