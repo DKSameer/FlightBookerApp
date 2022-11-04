@@ -2,7 +2,7 @@ import Link from "next/link";
 import { ReactElement, useState } from "react";
 import Passenger from "./passenger";
 import { PassengerClass, Age } from "./passenger";
-import Router from 'next/router'
+import Router from 'next/router';
 
 let passengers: Array<PassengerClass> = new Array<PassengerClass>();
 

@@ -4,7 +4,7 @@ import Calendar from "../components/calendar";
 import Link from "next/link";
 import axios from "axios";
 import { GlobalContext } from '../context/gcontext';
-import Router from 'next/router'
+import Router from 'next/router';
 
 export default function FlightDetails(): ReactElement {
     const { current_query_id, setCurrentQueryId, setFlights } = React.useContext(GlobalContext);
@@ -104,7 +104,7 @@ export default function FlightDetails(): ReactElement {
         const flight_details = {date: format_date(), origin: selected_origin, destination: selected_destination};
         // For some reason Spring API was recieving null data from 'fetch()' [NOT SURE WHY!]
         // So gotta use axios..
-        axios.post("http://localhost:8080/destination/day", flight_details).
+        axios.post(`http://localhost:8080/destination/day/${selected_flight_type}`, flight_details).
         then((response) => {
             setCurrentQueryId(response.data.id);
             setFlights(response.data.dayFlights);
