@@ -32,6 +32,7 @@ public class TestNG {
     public void beforeMethod() {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
+		driver.get("http://localhost:3000/");
         System.out.println("Starting the browser session");
     }
 
