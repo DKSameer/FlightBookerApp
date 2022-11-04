@@ -1,7 +1,6 @@
 import React from 'react';
 import { ReactElement, useState } from "react";
 import Calendar from "../components/calendar";
-import Link from "next/link";
 import axios from "axios";
 import { GlobalContext } from '../context/gcontext';
 import Router from 'next/router';
@@ -136,7 +135,7 @@ export default function FlightDetails(): ReactElement {
                     <select onChange={on_origin_change} className="w-full p-2.5 text-gray-500 bg-white border rounded-md shadow-sm outline-none appearance-none hover:border-sky-400 hover:cursor-pointer focus:border-sky-300">
                         {origins.map(
                             (origin) => (
-                                <option value={origin} key={origin}>{origin}</option>
+                                <option value={origin} key={origin} id={origin}>{origin}</option>
                             ))}
                     </select>
                 </div>
@@ -149,7 +148,7 @@ export default function FlightDetails(): ReactElement {
                     >
                         {destinations.map(
                             (destination) => (
-                                <option value={destination} key={destination}>{destination}</option>
+                                <option value={destination} key={destination} id={destination}>{destination}</option>
                             ))}
                     </select>
                 </div>
