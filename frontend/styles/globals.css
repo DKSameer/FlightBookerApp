@@ -3,6 +3,10 @@
 @tailwind utilities;
 
 @layer base {
+    body{
+        @apply flex justify-center items-center font-mono bg-[url("/sky.jpg")]
+    }
+
     .react-calendar { 
         width: 400px;
         max-width: 100%;
