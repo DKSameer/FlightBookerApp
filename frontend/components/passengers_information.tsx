@@ -9,9 +9,10 @@ import { useRouter } from 'next/router';
 let passengers: Array<PassengerClass> = new Array<PassengerClass>();
 
 export default function PassengersInformation(): ReactElement {
+    const flight_base_price = useRouter().query.price;
+    const [total_price, setTotalPrice] = useState<string>(flight_base_price ? flight_base_price.toString() : "");
     const [number_of_passengers_array, setNumberOfPassengersArray] = useState<Array<number>>(new Array<number>());
 
-    const flight_price = useRouter().query.price;
 
     function on_number_of_passengers_change(event: React.ChangeEvent<HTMLInputElement>): void{
         let x = new Array<number>();
@@ -35,11 +36,23 @@ export default function PassengersInformation(): ReactElement {
 
     function add_passenger(name: string, surname: string, nationality: string,
         identification: string, age: Age, bags: boolean): void{
-            if(!containsPassenger(name)){
-                passengers.push(new PassengerClass(name, surname, nationality, identification, age, bags));
+            /* 
+                If there's already a passenger with name as 'name', then remove it
+                and add it again after it since other properties might have changed.
+            */
+            if(containsPassenger(name)){
+                alert("Passenger with name '" + name + "' already exists. If you wish to update it, please remove it first.");
+                return;
             }
-            console.log(passengers);
+            passengers.push(new PassengerClass(name, surname, nationality, identification, age, bags));
+            update_total_price();
             return;
+    }
+
+    function delete_passenger(name: string): void{
+        passengers = passengers.filter((passenger) => {return passenger.name !== name});
+        update_total_price();
+        return;
     }
 
     function passengers_info_request_object(): any{
@@ -57,12 +70,20 @@ export default function PassengersInformation(): ReactElement {
                 kids++;
             }
         }
-        return {totalPassengers: passengers.length, luggages: luggages, kids: kids, babies: babies, basePrice: flight_price};
+        return {totalPassengers: passengers.length, luggages: luggages, kids: kids, babies: babies, basePrice: flight_base_price};
+    }
+
+    function update_total_price(): void{
+        const passengers_information = passengers_info_request_object();
+        axios.post(`http://localhost:8082/price`, passengers_information).
+        then((response) => {
+            setTotalPrice(response.data);
+        })
+        return;
     }
 
     function book_flight(): void{
         const passengers_information = passengers_info_request_object();
-        console.log(passengers_information);
         axios.post(`http://localhost:8082/price`, passengers_information)
         Router.push("/payment");
         return;
@@ -73,7 +94,7 @@ export default function PassengersInformation(): ReactElement {
             <div className="font-semibold m-4">Passengers Information</div>
             <div className="flex flex-col overflow-y-scroll h-96 my-10 mx-28 p-8 border rounded border-sky-300">
                 <div className="p-4">
-                    <Passenger p_data={add_passenger}></Passenger>
+                    <Passenger p_data={add_passenger} p_delete={delete_passenger}></Passenger>
                 </div>
                 <div className="p-4">
                     <input
@@ -87,10 +108,13 @@ export default function PassengersInformation(): ReactElement {
                     {number_of_passengers_array.map(
                     (p) => (
                         <div className="p-4" key={p}>
-                            <Passenger p_data={add_passenger}></Passenger>
+                            <Passenger p_data={add_passenger} p_delete={delete_passenger}></Passenger>
                         </div>
                     ))}
                 </div>
+            </div>
+            <div>
+                <p>Total: {total_price}€</p>
             </div>
             <div className="flex flex-col p-4 justify-end">
                 <button className="bg-sky-300 p-2 border border-sky-400 rounded" onClick={book_flight}>Book</button>

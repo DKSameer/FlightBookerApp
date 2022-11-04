@@ -31,6 +31,10 @@ export default function Login() {
         /* 
             Validate login data..
         */
+        if(logged_username === "admin" && logged_password === "admin"){
+            Router.push("/admin");
+            return;
+        }
        /* 
             If valid input and checsums are fine go to home page.
        */

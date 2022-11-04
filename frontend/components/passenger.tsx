@@ -30,12 +30,12 @@ export class PassengerClass {
     }
 }
 
-export default function PassengerC(props: {p_data: any}): ReactElement {
+export default function PassengerC(props: {p_data: any, p_delete: any}): ReactElement {
     const [name, setName] = useState<string>("");
     const [surname, setSurame] = useState<string>("");
     const [nationality, setNationality] = useState<string>("");
     const [identification, setIdentification] = useState<string>("");
-    const [age, setAge] = useState<Age>(Age.BiggerThan9);
+    const [age, setAge] = useState<Age>(Age.LessThan2);
     const [bags, setBags] = useState<boolean>(false);
 
     const age_list = new Array<Age>(Age.LessThan2, Age.Between2And9, Age.BiggerThan9);
@@ -75,6 +75,10 @@ export default function PassengerC(props: {p_data: any}): ReactElement {
 
     function pass_data(): void{
         props.p_data(name, surname, nationality, identification, age, bags);
+    }
+
+    function delete_user_info(): void{
+        props.p_delete(name);
     }
     
     return (
@@ -139,8 +143,13 @@ export default function PassengerC(props: {p_data: any}): ReactElement {
                     </select>
                 </div>
             </div>
-            <div className="m-4 mb-0 p-1 bg-white border rounded border-sky-400 hover:bg-green-200 hover:cursor-pointer w-fit">
-                <button id="save" onClick={pass_data}>Save</button>
+            <div className="flex flex-row">
+                <div className="m-4 mb-0 p-1 bg-white border rounded border-sky-400 hover:bg-green-200 hover:cursor-pointer w-fit">
+                    <button id="save" onClick={pass_data}>Save</button>
+                </div>
+                <div className="m-4 mb-0 p-1 bg-white border rounded border-sky-400 hover:bg-green-200 hover:cursor-pointer w-fit">
+                    <button id="save" onClick={delete_user_info}>Delete</button>
+                </div>
             </div>
         </div>
     );
