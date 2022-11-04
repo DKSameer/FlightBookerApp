@@ -57,7 +57,7 @@ export default function FlightDetails(): ReactElement {
         const origin_id = convert_origin(origin);
 
         if(origin_id < 0){
-            alert("You must select an origin");
+            return;
         }
 
         await fetch(`http://localhost:8080/destination/getdest/${origin_id}`, {
@@ -67,6 +67,7 @@ export default function FlightDetails(): ReactElement {
             return response.json();
         })
         .then((data) => {
+            console.log(data);
             setDestinations(data);
             setSelectedDestination(data[0]);
         })
