@@ -125,7 +125,7 @@ export default function FlightsList(): ReactElement {
                 <div className="flex justify-evenly flex-wrap overflow-y-scroll h-96 w-full my-14 border rounded border-sky-300">
                     {flights.map(
                         (flight: any) => (
-                            <Link href="/information" key={flight.id} className="flex justify-center items-center bg-sky-300 hover:bg-sky-400 w-2/3 p-2 m-4 select-none text-gray-800 hover:cursor-pointer border rounded border-sky-300">
+                            <Link href={{pathname:"/information", query:{price:flight.flightList.totalPrice}}} key={flight.id} className="flex justify-center items-center bg-sky-300 hover:bg-sky-400 w-2/3 p-2 m-4 select-none text-gray-800 hover:cursor-pointer border rounded border-sky-300">
                                 <div>
                                     <p className="m-1">Flight: <span className="font-semibold">{flight.id}</span></p>
                                     <div className="border rounded border-sky-200 m-1 hover:bg-sky-300">

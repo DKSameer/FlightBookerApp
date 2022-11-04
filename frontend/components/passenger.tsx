@@ -39,7 +39,7 @@ export default function PassengerC(props: {p_data: any}): ReactElement {
     const [bags, setBags] = useState<boolean>(false);
 
     const age_list = new Array<Age>(Age.LessThan2, Age.Between2And9, Age.BiggerThan9);
-    const bags_list = new Array<string>("Yes", "No");
+    const bags_list = new Array<string>("No", "Yes");
 
     let passenger = new PassengerClass(name, surname, nationality, identification, age, bags);
 
@@ -64,12 +64,12 @@ export default function PassengerC(props: {p_data: any}): ReactElement {
     }
 
     function on_age_change(event: React.ChangeEvent<HTMLSelectElement>): void{
-        setIdentification(event.target.value);
+        setAge(event.target.value === "0" ? Age.LessThan2 : (event.target.value === "1" ? Age.Between2And9 : Age.BiggerThan9));
         return;
     }
 
     function on_bags_change(event: React.ChangeEvent<HTMLSelectElement>): void{
-        setIdentification(event.target.value);
+        setBags(event.target.value == "Yes" ? true : false);
         return;
     }
 
