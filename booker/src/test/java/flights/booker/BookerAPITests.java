@@ -1,28 +1,20 @@
-package flights.generator;
+package flights.booker;
 
-import static io.restassured.RestAssured.*;
-//import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.stream.Stream;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import io.restassured.RestAssured;
-import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
-import io.restassured.response.ValidatableResponse;
 import io.restassured.specification.RequestSpecification;
 
-//import org.testng.Assert;
-
-public class RestAPITests {
-
+@SpringBootTest
+public class BookerAPITests {
+    
     enum Request {
         GET,
         POST
@@ -56,46 +48,15 @@ public class RestAPITests {
                 temp2 = temp.post(path);
                 break;
         }
-
         return temp2;
     }
-
-    public static void main(String[] args) {
-
-    }
-
-    private static Stream<Arguments> getFlightsArgs() {
-        return Stream.of(
-                Arguments.of("{\"date\" : \"2023-01-10\", \"origin\" : \"Madrid\",\"destination\" : \"Sevilla\"}"),
-                Arguments.of("{\"date\" : \"2023-02-20\", \"origin\" : \"Dublin\",\"destination\" : \"Lisbon\"}"),
-                Arguments.of("{\"date\" : \"2023-03-30\", \"origin\" : \"Rome\",\"destination\" : \"Sao Paulo\"}"));
-    }
-
-    @ParameterizedTest
-    @MethodSource("getFlightsArgs")
-    void testGetFlightsOneway(String bodyString) {
+    
+    @Test
+	void testConfirmBookingValidRequest(String bodyString) {
         RestAssured.baseURI = "http://localhost:8080/destination";
         body = bodyString;
         Response response = makeRequest(input, "/day", Request.POST, body, header);
         assertEquals(201,response.getStatusCode());
         clearInputMaps();
     }
-
-    @Test
-    void testGetFlightsRoundtrip() {
-        //
-    }
-
-    @Test
-    void testGetDestination(String bodyString) {
-    }
-
-    @Test
-    void testGetMapping() {
-    }
-
-    @Test
-    void testApplyFilters() {
-    }
-
 }
