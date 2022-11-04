@@ -90,6 +90,16 @@ export default function FlightDetails(): ReactElement {
         return;
     }
 
+    function format_flight_type(): string{
+        if(selected_flight_type === "One-way"){
+            return "oneway";
+        }
+        else if(selected_flight_type === "Round-trip"){
+            return "roundtrip";
+        }
+        else return "";
+    }
+
     function post_flight_details(): void{
         if(selected_origin === "" || selected_origin === "---"){
             alert("You must select an origin");
@@ -104,7 +114,7 @@ export default function FlightDetails(): ReactElement {
         const flight_details = {date: format_date(), origin: selected_origin, destination: selected_destination};
         // For some reason Spring API was recieving null data from 'fetch()' [NOT SURE WHY!]
         // So gotta use axios..
-        axios.post(`http://localhost:8080/destination/day/${selected_flight_type}`, flight_details).
+        axios.post(`http://localhost:8080/destination/day/${format_flight_type()}`, flight_details).
         then((response) => {
             setCurrentQueryId(response.data.id);
             setFlights(response.data.dayFlights);
