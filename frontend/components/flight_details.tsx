@@ -132,7 +132,7 @@ export default function FlightDetails(): ReactElement {
                     This is could be a Dropdown component but data management is completely c-word.
                 */}
                 <div className="relative w-full lg:max-w-sm">
-                    <select onChange={on_origin_change} className="w-full p-2.5 text-gray-500 bg-white border rounded-md shadow-sm outline-none appearance-none hover:border-sky-400 hover:cursor-pointer focus:border-sky-300">
+                    <select id="origin" onChange={on_origin_change} className="w-full p-2.5 text-gray-500 bg-white border rounded-md shadow-sm outline-none appearance-none hover:border-sky-400 hover:cursor-pointer focus:border-sky-300">
                         {origins.map(
                             (origin) => (
                                 <option value={origin} key={origin} id={origin}>{origin}</option>
@@ -143,7 +143,7 @@ export default function FlightDetails(): ReactElement {
             <div className="flex flex-col p-4">
                 <div className="m-2 ml-0 text-lg">Destionation</div>
                 <div className="relative w-full lg:max-w-sm">
-                    <select onChange={on_destination_change}
+                    <select id="destination" onChange={on_destination_change}
                     className="form-select w-full p-2.5 text-gray-500 bg-white border rounded-md shadow-sm outline-none appearance-none hover:border-sky-400 hover:cursor-pointer focus:border-sky-300"
                     >
                         {destinations.map(
