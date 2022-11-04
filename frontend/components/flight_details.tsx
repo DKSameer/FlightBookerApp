@@ -169,7 +169,7 @@ export default function FlightDetails(): ReactElement {
                 </div>
             </div>
         </div>
-        <div className="flex flex-col p-4 justify-end" onClick={post_flight_details}>
+        <div id="search" className="flex flex-col p-4 justify-end" onClick={post_flight_details}>
             <button className="bg-white p-2 border border-sky-300 rounded hover:bg-sky-300">Search Flights</button>
         </div>
     </div>

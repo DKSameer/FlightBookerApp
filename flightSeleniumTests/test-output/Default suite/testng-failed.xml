@@ -5,7 +5,9 @@
     <classes>
       <class name="testing.TestNG">
         <methods>
-          <include name="runTestCalculator" invocation-numbers="0"/>
+          <include name="testInsertingUsersInformation"/>
+          <include name="setUp"/>
+          <include name="close"/>
         </methods>
       </class> <!-- testing.TestNG -->
     </classes>
